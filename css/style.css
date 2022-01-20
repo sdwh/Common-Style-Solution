@@ -6,4 +6,18 @@ body {
     background-color: #eaeaea;
     font-size: 2em;
     padding: 0 2rem;
+    color: #2b2b2b
+}
+
+h1 {
+    text-align: center;
+}
+
+a {
+    color: #2b2b2b;
+    text-decoration:  none;
+}
+
+a:hover {
+    color: teal;
 }
