@@ -4,15 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Common Style Solution</title>
-    <link rel="stylesheet" href="./css/style.css">
+    <title>Flex</title>
+    <link rel="stylesheet" href="/css/flex.css">
+    <style>
+      .go-home-fixed {
+        position: fixed;
+        background-color: #007bff;
+        font-size: 1rem;
+        color: #fff;
+        padding: 10px;
+        border-radius: 2px;
+      }
+
+      .go-home-fixed:hover {
+        color: #fff;
+        background-color: #007baa;
+      }
+    </style>
 </head>
 <body>
-    <h1>Common Style Solution</h1>
+    <h1>Flex</h1>
 
     <div class="list">
         <div class="list-item">
-            <a href="/html/position.html">
+            <a href="#">
                 Position
                 <div class="list-img">
                     <img src="/image/pictures.svg" class="img-fluid">
@@ -20,7 +35,7 @@
               </a>
         </div>
         <div class="list-item">
-            <a href="/html/flex.html">
+            <a href="#">
                 Flex
                 <div class="list-img">
                     <img src="/image/flex.svg" class="img-fluid">
@@ -28,7 +43,7 @@
               </a>
         </div>
         <div class="list-item">
-            <a href="/html/grid.html">
+            <a href="#">
                 Grid
                 <div class="list-img">
                     <img src="/image/grid.svg" class="img-fluid">
@@ -36,7 +51,7 @@
               </a>
         </div>
         <div class="list-item">
-            <a href="/html/animation.html">
+            <a href="#">
                 Animation
                 <div class="list-img">
                     <img src="/image/triangle-square-circle.svg" class="img-fluid">
@@ -44,7 +59,7 @@
               </a>
         </div>
         <div class="list-item">
-            <a href="https:/tablericons.com/" target="_blank">
+            <a href=#">
                 Icons
                 <div class="list-img">
                     <img src="/image/bulb.svg" class="img-fluid">
@@ -53,5 +68,7 @@
             <p class="text-sm">100px size, 1px stroke</p>
         </div>        
     </div>
+
+    <a class="go-home-fixed" style="bottom:20px;right:20px" href="/index.html">Fixed</a>
 </body>
 </html>
