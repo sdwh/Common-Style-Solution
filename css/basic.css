@@ -1,0 +1,35 @@
+@import url("https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/cascadia-code.min.css");
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #eaeaea;
+    font-size: 2em;
+    padding: 0 2rem;
+    color: #2b2b2b;
+    font-family: 'Cascadia Code', sans-serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+a {
+    color: #2b2b2b;
+    text-decoration:  none;
+}
+
+.go-home-fixed {
+    position: fixed;
+    background-color: #007bff;
+    font-size: 1rem;
+    color: #fff;
+    padding: 10px;
+    border-radius: 2px;
+  }
+
+  .go-home-fixed:hover {
+    color: #fff;
+    background-color: #007baa;
+  }
