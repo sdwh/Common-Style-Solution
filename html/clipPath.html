@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Clip-Path &amp; Shapes | Common Style Solution</title>
+    <link rel="stylesheet" href="/css/clipPath.css">
+</head>
+<body>
+
+    <div class="top-nav">
+        <a href="/index.html" class="nav-link-home">&larr; Back to Overview</a>
+        <span class="badge badge-teal">Chapter 08: Clip-Path</span>
+    </div>
+
+    <div class="page-header">
+        <h1>Clip-Path &amp; CSS Shapes</h1>
+        <p class="subtitle">Sculpting Vectors, Polygons, Angled Section Dividers &amp; Flowing shape-outside</p>
+    </div>
+
+    <div class="container">
+
+        <!-- Section 1: Geometric Shapes with clip-path -->
+        <div class="demo-card">
+            <h2>1. Geometric Polygon &amp; Circle Presets</h2>
+            <p><code>clip-path</code> clips an element to a basic shape (circle, ellipse, polygon) or an SVG path.</p>
+
+            <div class="shapes-grid">
+                <!-- Circle -->
+                <div class="shape-item">
+                    <div class="shape-demo clip-circle"></div>
+                    <strong>circle()</strong>
+                    <small style="color: #64748b;">circle(50%)</small>
+                </div>
+
+                <!-- Triangle -->
+                <div class="shape-item">
+                    <div class="shape-demo clip-triangle"></div>
+                    <strong>Triangle</strong>
+                    <small style="color: #64748b;">polygon(3 points)</small>
+                </div>
+
+                <!-- Chevron -->
+                <div class="shape-item">
+                    <div class="shape-demo clip-chevron"></div>
+                    <strong>Chevron</strong>
+                    <small style="color: #64748b;">Arrow indicator</small>
+                </div>
+
+                <!-- Star -->
+                <div class="shape-item">
+                    <div class="shape-demo clip-star"></div>
+                    <strong>Star</strong>
+                    <small style="color: #64748b;">polygon(10 points)</small>
+                </div>
+
+                <!-- Hexagon -->
+                <div class="shape-item">
+                    <div class="shape-demo clip-hexagon"></div>
+                    <strong>Hexagon</strong>
+                    <small style="color: #64748b;">polygon(6 points)</small>
+                </div>
+
+                <!-- Speech Bubble -->
+                <div class="shape-item">
+                    <div class="shape-demo clip-bubble"></div>
+                    <strong>Speech Bubble</strong>
+                    <small style="color: #64748b;">Tail marker</small>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>.circle   { clip-path: circle(50% at 50% 50%); }
+.triangle { clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
+.star     { clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); }</code></pre>
+        </div>
+
+        <!-- Section 2: Slanted Section Divider -->
+        <div class="demo-card">
+            <h2>2. Slanted / Angled Section Dividers</h2>
+            <p>Modern landing pages often break monotony with angled section dividers using <code>clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);</code>.</p>
+
+            <div class="slanted-wrapper">
+                <div class="slanted-section">
+                    <h3 style="margin: 0 0 10px 0; color: white;">Dynamic Slanted Section</h3>
+                    <p style="margin: 0; max-width: 600px; font-size: 0.95rem; opacity: 0.95;">
+                        Instead of boring horizontal lines, angled clipping gives websites modern energy and movement.
+                    </p>
+                </div>
+                <div style="padding: 24px; background: white;">
+                    <p style="margin: 0; color: #475569; font-size: 0.9rem;">
+                        Content beneath the slanted section continues naturally in normal document flow.
+                    </p>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>.slanted-section {
+    background: linear-gradient(135deg, #008080, #0d9488);
+    clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    padding-bottom: 60px; /* Offset the diagonal angle */
+}</code></pre>
+        </div>
+
+        <!-- Section 3: shape-outside Text Wrapping -->
+        <div class="demo-card">
+            <h2>3. Curving Text with shape-outside</h2>
+            <p>Unlike standard floats which only wrap text around a bounding rectangle, <code>shape-outside: circle(50%);</code> causes inline text to wrap around the actual circular curve of the image!</p>
+
+            <div class="shape-outside-box">
+                <div class="float-circle">
+                    <img src="/image/openmoji-scissors.svg" alt="Scissors">
+                </div>
+                <p>
+                    CSS Shapes allow web designers to wrap content around custom geometric paths. In editorial magazine layouts, text frequently hugs circular portraits and organic contours. With <code>shape-outside: circle(50%)</code> and <code>float: left</code>, the browser recalculates line box intersections, smoothly bending paragraphs along the arc of the circle. Try resizing your browser window to observe how dynamically the fluid typography responds to the curved clipping boundary!
+                </p>
+            </div>
+
+            <pre class="code-box"><code>.float-circle {
+    float: left;
+    width: 120px;
+    height: 120px;
+    shape-outside: circle(50%); /* Text curves around circle! */
+    clip-path: circle(50%);     /* Clips element visually */
+    margin-right: 20px;
+}</code></pre>
+        </div>
+
+    </div>
+
+    <!-- Fixed Home Button -->
+    <a class="go-home-fixed" href="/index.html">Fixed 🏠</a>
+
+</body>
+</html>

@@ -4,62 +4,157 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Common Style Solution</title>
+    <title>Common Style Solution | CSS Tips & Snippets</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <h1>Common Style Solution</h1>
+    <header class="site-header">
+        <h1>Common Style Solution</h1>
+        <p class="site-desc">Tips &amp; Snippets for Modern CSS 😎 | Visual Guides &amp; Interactive Playgrounds</p>
+        <div class="site-tags">
+            <span class="site-tag">⚡ Modern CSS</span>
+            <span class="site-tag">🎨 OpenMoji &amp; Tabler Icons</span>
+            <span class="site-tag">📐 Layout Mastery</span>
+            <span class="site-tag">🚀 Pure CSS Tricks</span>
+        </div>
+    </header>
 
     <div class="list">
+        <!-- 1. Position -->
         <div class="list-item">
             <a href="/html/position.html">
-                Position
+                <span class="item-badge">Layout</span>
+                <span class="item-title">Position</span>
                 <div class="list-img">
-                    <img src="/image/pictures.svg" class="img-fluid">
+                    <img src="/image/pictures.svg" class="img-fluid" alt="Position">
                 </div>
-              </a>
+            </a>
+            <p class="text-sm">static, relative, absolute, fixed, sticky &amp; stacking</p>
         </div>
+
+        <!-- 2. Flex -->
         <div class="list-item">
             <a href="/html/flex.html">
-                Flex
+                <span class="item-badge">Layout</span>
+                <span class="item-title">Flex</span>
                 <div class="list-img">
-                    <img src="/image/flex.svg" class="img-fluid">
+                    <img src="/image/flex.svg" class="img-fluid" alt="Flexbox">
                 </div>
-              </a>
+            </a>
+            <p class="text-sm">direction, justify, align, grow, shrink &amp; recipes</p>
         </div>
+
+        <!-- 3. Grid -->
         <div class="list-item">
             <a href="/html/grid.html">
-                Grid
+                <span class="item-badge">Layout</span>
+                <span class="item-title">Grid</span>
                 <div class="list-img">
-                    <img src="/image/grid.svg" class="img-fluid">
+                    <img src="/image/grid.svg" class="img-fluid" alt="CSS Grid">
                 </div>
-              </a>
+            </a>
+            <p class="text-sm">template, repeat, auto-fit, minmax, areas &amp; bento</p>
         </div>
+
+        <!-- 4. Animation -->
         <div class="list-item">
             <a href="/html/animation.html">
-                Animation
+                <span class="item-badge">Motion</span>
+                <span class="item-title">Animation</span>
                 <div class="list-img">
-                    <img src="/image/triangle-square-circle.svg" class="img-fluid">
-                </div>
-              </a>
-        </div>
-        <div class="list-item">
-            <a href="https://tablericons.com" target="_blank">
-                Icons
-                <div class="list-img">
-                    <img src="/image/bulb.svg" class="img-fluid">
+                    <img src="/image/triangle-square-circle.svg" class="img-fluid" alt="Animation">
                 </div>
             </a>
-            <p class="text-sm">100px size, 1px stroke</p>
+            <p class="text-sm">transitions, keyframes, loaders, rockets &amp; marquee</p>
         </div>
+
+        <!-- 5. Pseudo Class -->
         <div class="list-item">
-            <a href="/html/pseudoClass.html" target="_blank">
-                Pseudo Class
+            <a href="/html/pseudoClass.html">
+                <span class="item-badge">Selectors</span>
+                <span class="item-title">Pseudo Class</span>
                 <div class="list-img">
-                    <img src="/image/stroke.svg" class="img-fluid">
+                    <img src="/image/stroke.svg" class="img-fluid" alt="Pseudo Class">
                 </div>
             </a>
-        </div>            
+            <p class="text-sm">:hover, :has(), :is(), ::before, ::after, tooltips</p>
+        </div>
+
+        <!-- 6. Transforms -->
+        <div class="list-item">
+            <a href="/html/transform.html">
+                <span class="item-badge">Motion & 3D</span>
+                <span class="item-title">Transforms</span>
+                <div class="list-img">
+                    <img src="/image/openmoji-transform.svg" class="img-fluid" alt="Transforms">
+                </div>
+            </a>
+            <p class="text-sm">2D &amp; 3D perspective, rotate, scale, 3D flip card</p>
+        </div>
+
+        <!-- 7. Effects & Shadows -->
+        <div class="list-item">
+            <a href="/html/effects.html">
+                <span class="item-badge">Visuals</span>
+                <span class="item-title">Effects &amp; Shadows</span>
+                <div class="list-img">
+                    <img src="/image/openmoji-palette.svg" class="img-fluid" alt="Effects">
+                </div>
+            </a>
+            <p class="text-sm">gradients, glassmorphism, soft shadows, filters</p>
+        </div>
+
+        <!-- 8. Clip-Path & Shapes -->
+        <div class="list-item">
+            <a href="/html/clipPath.html">
+                <span class="item-badge">Shapes</span>
+                <span class="item-title">Clip-Path &amp; Shapes</span>
+                <div class="list-img">
+                    <img src="/image/openmoji-scissors.svg" class="img-fluid" alt="Clip Path">
+                </div>
+            </a>
+            <p class="text-sm">polygon, circle, angled dividers &amp; shape-outside</p>
+        </div>
+
+        <!-- 9. Modern CSS -->
+        <div class="list-item">
+            <a href="/html/modernCss.html">
+                <span class="item-badge">Features</span>
+                <span class="item-title">Modern CSS</span>
+                <div class="list-img">
+                    <img src="/image/openmoji-wand.svg" class="img-fluid" alt="Modern CSS">
+                </div>
+            </a>
+            <p class="text-sm">CSS variables, theming, :has(), aspect-ratio, clamp()</p>
+        </div>
+
+        <!-- 10. Responsive Design -->
+        <div class="list-item">
+            <a href="/html/responsive.html">
+                <span class="item-badge">Techniques</span>
+                <span class="item-title">Responsive</span>
+                <div class="list-img">
+                    <img src="/image/openmoji-mobile.svg" class="img-fluid" alt="Responsive Design">
+                </div>
+            </a>
+            <p class="text-sm">media queries, container queries, viewport units</p>
+        </div>
+
+        <!-- 11. Icons & OpenMoji -->
+        <div class="list-item">
+            <a href="/html/icons.html">
+                <span class="item-badge">Assets</span>
+                <span class="item-title">Icons &amp; OpenMoji</span>
+                <div class="list-img">
+                    <img src="/image/bulb.svg" class="img-fluid" alt="Icons">
+                </div>
+            </a>
+            <p class="text-sm">SVG styling, Tabler Icons &amp; OpenMoji library guide</p>
+        </div>
     </div>
+
+    <footer class="site-footer">
+        <p>Common Style Solution &copy; <a href="https://css.sdwh.dev">css.sdwh.dev</a> | Illustrations by <a href="https://openmoji.org" target="_blank" rel="noopener">OpenMoji</a> &amp; <a href="https://tablericons.com" target="_blank" rel="noopener">Tabler Icons</a></p>
+    </footer>
 </body>
 </html>

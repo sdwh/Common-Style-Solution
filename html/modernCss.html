@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern CSS &amp; Variables | Common Style Solution</title>
+    <link rel="stylesheet" href="/css/modernCss.css">
+</head>
+<body>
+
+    <div class="top-nav">
+        <a href="/index.html" class="nav-link-home">&larr; Back to Overview</a>
+        <span class="badge badge-teal">Chapter 09: Modern CSS</span>
+    </div>
+
+    <div class="page-header">
+        <h1>Modern CSS Features &amp; Variables</h1>
+        <p class="subtitle">CSS Custom Properties, Sibling Hover Dimming via :has(), Aspect Ratio &amp; Scroll Snap</p>
+    </div>
+
+    <div class="container">
+
+        <!-- Section 1: CSS Variables & Dynamic Theming -->
+        <div class="demo-card">
+            <h2>1. CSS Custom Properties &amp; Live Theme Switcher</h2>
+            <p>CSS variables (<code>--var-name</code>) allow dynamic theming that cascades down the DOM tree without reloading or CSS preprocessing.</p>
+
+            <div class="controls-bar" id="theme-controls">
+                <button class="btn-control active" onclick="setDemoTheme('default', this)">Default Light</button>
+                <button class="btn-control" onclick="setDemoTheme('theme-dark', this)">Dark Mode</button>
+                <button class="btn-control" onclick="setDemoTheme('theme-teal', this)">Mint Teal</button>
+                <button class="btn-control" onclick="setDemoTheme('theme-cyber', this)">Cyber Sunset</button>
+            </div>
+
+            <div class="theme-demo-box" id="themeBox">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="font-weight: bold; font-size: 1.1rem;">Live CSS Theme Component</div>
+                    <img src="/image/openmoji-wand.svg" width="36" height="36" alt="Magic Wand">
+                </div>
+
+                <div class="theme-card-preview">
+                    <h4 style="margin: 0 0 6px 0;">Dynamic Palette Application</h4>
+                    <p style="margin: 0 0 12px 0; font-size: 0.9rem; opacity: 0.85;">
+                        Notice how the background, border, typography color, and button style adapt synchronously through CSS Custom Properties!
+                    </p>
+                    <button class="theme-btn-preview">Action Button</button>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>:root {
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --primary: #008080;
+    --text: #1e293b;
+}
+.theme-dark {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --primary: #38bdf8;
+    --text: #f8fafc;
+}</code></pre>
+        </div>
+
+        <!-- Section 2: :has() Sibling Hover Dimming -->
+        <div class="demo-card">
+            <h2>2. Sibling Hover Dimming using :has()</h2>
+            <p>Hover over any card below. Notice how all <em>other</em> cards dim smoothly, focusing attention on the active element — achieved purely in CSS without JS mouse event handlers!</p>
+
+            <div class="dimming-list">
+                <div class="dimming-item">
+                    <img src="/image/openmoji-rocket.svg" width="48" height="48" alt="Rocket">
+                    <div style="font-weight: bold; margin-top: 6px;">Fast</div>
+                </div>
+                <div class="dimming-item">
+                    <img src="/image/openmoji-gem.svg" width="48" height="48" alt="Gem">
+                    <div style="font-weight: bold; margin-top: 6px;">Precious</div>
+                </div>
+                <div class="dimming-item">
+                    <img src="/image/openmoji-fire.svg" width="48" height="48" alt="Fire">
+                    <div style="font-weight: bold; margin-top: 6px;">Dynamic</div>
+                </div>
+                <div class="dimming-item">
+                    <img src="/image/openmoji-superhero.svg" width="48" height="48" alt="Hero">
+                    <div style="font-weight: bold; margin-top: 6px;">Powerful</div>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>/* When container has a hovered child, dim all other children */
+.container:has(.item:hover) .item:not(:hover) {
+    opacity: 0.35;
+    transform: scale(0.95);
+}
+.item:hover {
+    transform: scale(1.05);
+}</code></pre>
+        </div>
+
+        <!-- Section 3: aspect-ratio -->
+        <div class="demo-card">
+            <h2>3. Native aspect-ratio (No Padding Hacks!)</h2>
+            <p>Replace older <code>padding-top: 56.25%</code> hacks with modern native <code>aspect-ratio</code> for responsive video wrappers and square avatars.</p>
+
+            <div class="aspect-grid">
+                <div class="aspect-box aspect-16-9">
+                    <span>16 / 9</span>
+                    <small>Video widescreen ratio</small>
+                </div>
+                <div class="aspect-box aspect-1-1">
+                    <span>1 / 1</span>
+                    <small>Square avatar / icon</small>
+                </div>
+                <div class="aspect-box aspect-4-3">
+                    <span>4 / 3</span>
+                    <small>Standard photo ratio</small>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>.video-box  { aspect-ratio: 16 / 9; }
+.avatar-box { aspect-ratio: 1 / 1; }
+.photo-box  { aspect-ratio: 4 / 3; }</code></pre>
+        </div>
+
+        <!-- Section 4: CSS Scroll Snap Carousel -->
+        <div class="demo-card">
+            <h2>4. Pure CSS Scroll Snap Carousel</h2>
+            <p>Smooth touch and mouse scrolling carousel that snaps to cards automatically. Scroll horizontally below!</p>
+
+            <div class="snap-carousel">
+                <div class="snap-card">
+                    <img src="/image/openmoji-ninja.svg" width="56" height="56" alt="Ninja">
+                    <h4 style="margin: 8px 0 4px 0;">Ninja</h4>
+                    <small style="color: #64748b;">Snap Item 1</small>
+                </div>
+                <div class="snap-card">
+                    <img src="/image/openmoji-robot.svg" width="56" height="56" alt="Robot">
+                    <h4 style="margin: 8px 0 4px 0;">Robot</h4>
+                    <small style="color: #64748b;">Snap Item 2</small>
+                </div>
+                <div class="snap-card">
+                    <img src="/image/openmoji-mage.svg" width="56" height="56" alt="Mage">
+                    <h4 style="margin: 8px 0 4px 0;">Mage</h4>
+                    <small style="color: #64748b;">Snap Item 3</small>
+                </div>
+                <div class="snap-card">
+                    <img src="/image/openmoji-superhero.svg" width="56" height="56" alt="Hero">
+                    <h4 style="margin: 8px 0 4px 0;">Hero</h4>
+                    <small style="color: #64748b;">Snap Item 4</small>
+                </div>
+                <div class="snap-card">
+                    <img src="/image/openmoji-rocket.svg" width="56" height="56" alt="Rocket">
+                    <h4 style="margin: 8px 0 4px 0;">Rocket</h4>
+                    <small style="color: #64748b;">Snap Item 5</small>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>.carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+}
+.card {
+    scroll-snap-align: center;
+}</code></pre>
+        </div>
+
+    </div>
+
+    <!-- Fixed Home Button -->
+    <a class="go-home-fixed" href="/index.html">Fixed 🏠</a>
+
+    <script>
+        function setDemoTheme(themeClass, btn) {
+            const box = document.getElementById('themeBox');
+            box.className = 'theme-demo-box';
+            if (themeClass !== 'default') {
+                box.classList.add(themeClass);
+            }
+            document.querySelectorAll('#theme-controls .btn-control').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+    </script>
+</body>
+</html>

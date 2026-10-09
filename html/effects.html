@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Effects, Shadows &amp; Gradients | Common Style Solution</title>
+    <link rel="stylesheet" href="/css/effects.css">
+</head>
+<body>
+
+    <div class="top-nav">
+        <a href="/index.html" class="nav-link-home">&larr; Back to Overview</a>
+        <span class="badge badge-teal">Chapter 07: Effects &amp; Shadows</span>
+    </div>
+
+    <div class="page-header">
+        <h1>Effects, Shadows &amp; Gradients</h1>
+        <p class="subtitle">Gradients, Layered Elevation, Glassmorphism &amp; CSS Filter Playground</p>
+    </div>
+
+    <div class="container">
+
+        <!-- Section 1: Gradients & Gradient Borders -->
+        <div class="demo-card">
+            <h2>1. Linear, Radial &amp; Conic Gradients</h2>
+            <p>CSS Gradients render smooth transitions between colors without bitmap assets.</p>
+
+            <div class="gradient-grid">
+                <div class="gradient-card linear-grad">
+                    <span>Linear Gradient</span>
+                    <small>135deg multi-stop</small>
+                </div>
+                <div class="gradient-card radial-grad">
+                    <span>Radial Gradient</span>
+                    <small>Circle at center</small>
+                </div>
+                <div class="gradient-card conic-grad">
+                    <span>Conic Gradient</span>
+                    <small>Color wheel angle</small>
+                </div>
+            </div>
+
+            <div style="margin-top: 1.5rem;">
+                <div class="gradient-border-card">
+                    <h3 style="margin-top: 0;">Gradient Border Card</h3>
+                    <p style="margin: 0; color: #475569; font-size: 0.9rem;">
+                        Achieved using a pseudo-element with <code>inset: -3px;</code> and a vibrant gradient background sitting behind the card body.
+                    </p>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>.linear { background: linear-gradient(135deg, #667eea, #764ba2); }
+.radial { background: radial-gradient(circle at center, #f59e0b, #dc2626); }
+.conic  { background: conic-gradient(from 0deg, red, yellow, green, cyan, blue, red); }</code></pre>
+        </div>
+
+        <!-- Section 2: box-shadow vs filter: drop-shadow -->
+        <div class="demo-card">
+            <h2>2. Crucial Comparison: box-shadow vs. drop-shadow()</h2>
+            <p>Notice the vital difference below: <code>box-shadow</code> casts a shadow on the rectangular bounding box, whereas <code>filter: drop-shadow()</code> traces the exact non-transparent contours of the SVG / PNG!</p>
+
+            <div class="shadow-compare-stage">
+                <!-- box-shadow -->
+                <div style="text-align: center;">
+                    <div class="box-shadow-target" style="display: inline-block;">
+                        <img src="/image/openmoji-palette.svg" width="90" height="90" alt="Palette Box Shadow">
+                    </div>
+                    <div style="font-weight: bold; margin-top: 10px; color: #dc2626;">box-shadow</div>
+                    <small style="color: #64748b;">Shadows the rectangular container</small>
+                </div>
+
+                <!-- drop-shadow -->
+                <div style="text-align: center;">
+                    <div class="drop-shadow-target" style="display: inline-block;">
+                        <img src="/image/openmoji-palette.svg" width="90" height="90" alt="Palette Drop Shadow">
+                    </div>
+                    <div style="font-weight: bold; margin-top: 10px; color: #059669;">filter: drop-shadow()</div>
+                    <small style="color: #64748b;">Traces the transparent SVG shape!</small>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>/* Bad for transparent icons: shadows rectangle */
+.icon { box-shadow: 10px 10px 15px rgba(0,0,0,0.4); }
+
+/* Best for transparent icons: shadows contour! */
+.icon { filter: drop-shadow(10px 10px 10px rgba(0,0,0,0.4)); }</code></pre>
+        </div>
+
+        <!-- Section 3: Glassmorphism (Frosted Glass) -->
+        <div class="demo-card">
+            <h2>3. Modern Glassmorphism (Frosted Glass)</h2>
+            <p>Combine semi-transparent backgrounds with <code>backdrop-filter: blur(14px);</code> to create realistic frosted glass UI panels.</p>
+
+            <div class="glass-stage">
+                <div class="glass-bubble" style="top: 20px; left: 60px;"></div>
+                <div class="glass-bubble" style="bottom: 20px; right: 80px; width: 140px; height: 140px; background: rgba(255, 230, 0, 0.4);"></div>
+
+                <div class="glass-card">
+                    <img src="/image/openmoji-gem.svg" width="48" height="48" alt="Gem" style="margin-bottom: 8px;">
+                    <h3 style="margin: 0 0 8px 0; color: white;">Glassmorphism Card</h3>
+                    <p style="margin: 0; font-size: 0.9rem; opacity: 0.9;">
+                        Background elements are dynamically blurred behind this container.
+                    </p>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>.glass-card {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}</code></pre>
+        </div>
+
+        <!-- Section 4: CSS Filters Playground -->
+        <div class="demo-card">
+            <h2>4. Interactive CSS Filter Playground</h2>
+            <p>Click the buttons below to apply hardware-accelerated CSS filters directly to the OpenMoji illustration!</p>
+
+            <div class="controls-bar" id="filter-controls">
+                <button class="btn-control active" onclick="applyFilter('none', this)">none</button>
+                <button class="btn-control" onclick="applyFilter('grayscale(100%)', this)">grayscale</button>
+                <button class="btn-control" onclick="applyFilter('sepia(100%)', this)">sepia</button>
+                <button class="btn-control" onclick="applyFilter('invert(100%)', this)">invert</button>
+                <button class="btn-control" onclick="applyFilter('hue-rotate(180deg)', this)">hue-rotate(180deg)</button>
+                <button class="btn-control" onclick="applyFilter('blur(4px)', this)">blur(4px)</button>
+                <button class="btn-control" onclick="applyFilter('contrast(200%)', this)">contrast(200%)</button>
+            </div>
+
+            <div class="filter-playground">
+                <img src="/image/openmoji-rainbow.svg" id="filterTarget" class="filter-target" width="130" height="130" alt="Rainbow Filter Target">
+                <div style="font-weight: bold;" id="currentFilterLabel">filter: none;</div>
+            </div>
+
+            <pre class="code-box" id="filterCode"><code>.target { filter: none; }</code></pre>
+        </div>
+
+    </div>
+
+    <!-- Fixed Home Button -->
+    <a class="go-home-fixed" href="/index.html">Fixed 🏠</a>
+
+    <script>
+        function applyFilter(filterStr, btn) {
+            const target = document.getElementById('filterTarget');
+            const label = document.getElementById('currentFilterLabel');
+            const code = document.getElementById('filterCode');
+
+            target.style.filter = filterStr;
+            label.textContent = `filter: ${filterStr};`;
+            code.innerHTML = `<code>.target { filter: ${filterStr}; }</code>`;
+
+            document.querySelectorAll('#filter-controls .btn-control').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+    </script>
+</body>
+</html>

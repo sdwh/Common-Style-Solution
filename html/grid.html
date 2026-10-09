@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Grid | Common Style Solution</title>
+    <link rel="stylesheet" href="/css/grid.css">
+</head>
+<body>
+
+    <div class="top-nav">
+        <a href="/index.html" class="nav-link-home">&larr; Back to Overview</a>
+        <span class="badge badge-teal">Chapter 03: Grid</span>
+    </div>
+
+    <div class="page-header">
+        <h1>CSS Grid Layout</h1>
+        <p class="subtitle">The Ultimate 2-Dimensional Layout System: Columns, Rows, Areas &amp; Responsive Patterns</p>
+    </div>
+
+    <div class="container">
+
+        <!-- Section 1: Magic Responsive Grid without Media Queries -->
+        <div class="demo-card">
+            <h2>1. The Magic Auto-Fit Grid (Zero Media Queries!)</h2>
+            <p>Every web developer's favorite trick: <code>repeat(auto-fit, minmax(160px, 1fr))</code> creates a completely responsive grid of cards that wraps automatically at any screen size!</p>
+
+            <div class="magic-grid">
+                <div class="card-item">
+                    <img src="/image/openmoji-robot.svg" alt="Robot">
+                    <span>#1 Robot</span>
+                </div>
+                <div class="card-item">
+                    <img src="/image/openmoji-ninja.svg" alt="Ninja">
+                    <span>#2 Ninja</span>
+                </div>
+                <div class="card-item">
+                    <img src="/image/openmoji-superhero.svg" alt="Superhero">
+                    <span>#3 Superhero</span>
+                </div>
+                <div class="card-item">
+                    <img src="/image/openmoji-mage.svg" alt="Mage">
+                    <span>#4 Mage</span>
+                </div>
+                <div class="card-item">
+                    <img src="/image/openmoji-gem.svg" alt="Gem">
+                    <span>#5 Crystal</span>
+                </div>
+                <div class="card-item">
+                    <img src="/image/openmoji-fire.svg" alt="Fire">
+                    <span>#6 Element</span>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>.magic-grid {
+    display: grid;
+    /* Automatically creates as many columns as fit (min 160px, max 1fr) */
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 16px;
+}</code></pre>
+
+            <div class="note-box">
+                💡 <strong>auto-fit vs auto-fill:</strong> <code>auto-fit</code> stretches the existing cards across the full width if there is empty room. <code>auto-fill</code> reserves empty column tracks for future elements without stretching existing cards.
+            </div>
+        </div>
+
+        <!-- Section 2: Bento Grid / Row & Column Spanning -->
+        <div class="demo-card">
+            <h2>2. Bento Box Grid: Spanning Rows &amp; Columns</h2>
+            <p>Modern UI dashboards and landing pages (like Apple and Linear) use asymmetrical Bento grids with <code>grid-column: span X;</code> and <code>grid-row: span Y;</code>.</p>
+
+            <div class="bento-grid">
+                <!-- Featured Card (2x2) -->
+                <div class="bento-card bento-featured">
+                    <div>
+                        <span class="badge badge-teal">Featured</span>
+                        <h3 style="margin: 8px 0 4px 0;">Hero Character</h3>
+                        <p style="font-size: 0.85rem; color: #475569; margin: 0;">Spans 2 columns &amp; 2 rows.</p>
+                    </div>
+                    <img src="/image/openmoji-superhero.svg" width="64" height="64" alt="Hero" style="align-self: flex-end;">
+                </div>
+
+                <!-- Regular Card -->
+                <div class="bento-card">
+                    <span class="badge badge-blue">Stats</span>
+                    <strong style="font-size: 1.3rem;">99.9%</strong>
+                    <small style="color: #64748b;">Uptime rate</small>
+                </div>
+
+                <!-- Tall Card (1x2) -->
+                <div class="bento-card bento-tall">
+                    <div>
+                        <span class="badge badge-orange">Status</span>
+                        <h4 style="margin: 6px 0;">Live Tracker</h4>
+                    </div>
+                    <img src="/image/openmoji-rocket.svg" width="56" height="56" alt="Rocket" style="align-self: center; margin: 10px 0;">
+                    <small style="color: #64748b; text-align: center;">Orbital velocity: Stable</small>
+                </div>
+
+                <!-- Wide Card (2x1) -->
+                <div class="bento-card bento-wide">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <span class="badge">Integration</span>
+                            <div style="font-weight: bold; margin-top: 4px;">OpenMoji Library Connected</div>
+                        </div>
+                        <img src="/image/openmoji-puzzle.svg" width="40" height="40" alt="Puzzle">
+                    </div>
+                </div>
+
+                <!-- Regular Card -->
+                <div class="bento-card">
+                    <span class="badge badge-teal">Security</span>
+                    <div style="font-weight: bold;">Vault Protected</div>
+                    <small style="color: #64748b;">256-bit encryption</small>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>.bento-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 120px;
+    gap: 14px;
+}
+.bento-featured { grid-column: span 2; grid-row: span 2; }
+.bento-wide     { grid-column: span 2; }
+.bento-tall     { grid-row: span 2; }</code></pre>
+        </div>
+
+        <!-- Section 3: Named Grid Template Areas -->
+        <div class="demo-card">
+            <h2>3. Semantic Layouts with grid-template-areas</h2>
+            <p>Design complete application layouts visually in code using ASCII-like named areas.</p>
+
+            <div class="dashboard-grid">
+                <div class="area-header">
+                    <strong>Dashboard Header</strong> | Modern App Bar
+                </div>
+                <div class="area-sidebar">
+                    <strong>Sidebar</strong>
+                    <ul style="padding-left: 18px; margin: 8px 0 0 0; font-size: 0.85rem;">
+                        <li>Overview</li>
+                        <li>Analytics</li>
+                        <li>Settings</li>
+                    </ul>
+                </div>
+                <div class="area-main">
+                    <strong>Main Content Area</strong>
+                    <p style="font-size: 0.85rem; color: #475569; margin: 8px 0 0 0;">
+                        The main view automatically fills the remaining horizontal and vertical space allotted by the grid track template.
+                    </p>
+                </div>
+                <div class="area-widget">
+                    <strong>Notification Widget</strong>: System is operating normally.
+                </div>
+                <div class="area-footer">
+                    &copy; Common Style Solution Grid System
+                </div>
+            </div>
+
+            <pre class="code-box"><code>.dashboard {
+    display: grid;
+    grid-template-areas:
+        "header  header header"
+        "sidebar main   main"
+        "sidebar widget widget"
+        "footer  footer footer";
+    grid-template-columns: 180px 1fr 1fr;
+    gap: 12px;
+}
+.header  { grid-area: header; }
+.sidebar { grid-area: sidebar; }
+.main    { grid-area: main; }
+.widget  { grid-area: widget; }
+.footer  { grid-area: footer; }</code></pre>
+        </div>
+
+        <!-- Section 4: 1-Line Modern Centering: place-items: center -->
+        <div class="demo-card">
+            <h2>4. The 1-Line Center: place-items: center</h2>
+            <p>Shorthand for <code>align-items: center</code> and <code>justify-items: center</code> combined. It centers elements in both axes with a single property!</p>
+
+            <div class="place-center-box">
+                <div style="background: white; padding: 14px 28px; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 10px;">
+                    <img src="/image/openmoji-sparkles.svg" width="36" height="36" alt="Sparkles">
+                    <div>
+                        <div style="font-weight: bold;">Centered in 1 line!</div>
+                        <small style="color: #64748b;">display: grid; place-items: center;</small>
+                    </div>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>.container {
+    display: grid;
+    place-items: center; /* Centers both horizontally &amp; vertically! */
+    height: 180px;
+}</code></pre>
+        </div>
+
+    </div>
+
+    <!-- Fixed Home Button -->
+    <a class="go-home-fixed" href="/index.html">Fixed 🏠</a>
+
+</body>
+</html>

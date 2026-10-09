@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Transforms 2D &amp; 3D | Common Style Solution</title>
+    <link rel="stylesheet" href="/css/transform.css">
+</head>
+<body>
+
+    <div class="top-nav">
+        <a href="/index.html" class="nav-link-home">&larr; Back to Overview</a>
+        <span class="badge badge-teal">Chapter 06: Transforms</span>
+    </div>
+
+    <div class="page-header">
+        <h1>2D &amp; 3D Transforms</h1>
+        <p class="subtitle">Rotating, Scaling, Skewing, 3D Perspective &amp; Interactive Card Flips</p>
+    </div>
+
+    <div class="container">
+
+        <!-- Section 1: 2D Transforms Library -->
+        <div class="demo-card">
+            <h2>1. 2D Transform Functions (Hover each card!)</h2>
+            <p>2D transforms manipulate elements without disrupting the surrounding document flow layout.</p>
+
+            <div class="transform-grid">
+                <!-- Rotate -->
+                <div class="transform-box">
+                    <div class="transform-target target-rotate">
+                        <img src="/image/openmoji-transform.svg" alt="Rotate">
+                    </div>
+                    <div style="font-weight: bold; margin-top: 8px;">rotate(45deg)</div>
+                    <small style="color: #64748b;">Hover to rotate</small>
+                </div>
+
+                <!-- Scale -->
+                <div class="transform-box">
+                    <div class="transform-target target-scale">
+                        <img src="/image/openmoji-gem.svg" alt="Scale">
+                    </div>
+                    <div style="font-weight: bold; margin-top: 8px;">scale(1.25)</div>
+                    <small style="color: #64748b;">Hover to expand</small>
+                </div>
+
+                <!-- Skew -->
+                <div class="transform-box">
+                    <div class="transform-target target-skew">
+                        <img src="/image/openmoji-ninja.svg" alt="Skew">
+                    </div>
+                    <div style="font-weight: bold; margin-top: 8px;">skewX(-15deg)</div>
+                    <small style="color: #64748b;">Hover to slant</small>
+                </div>
+
+                <!-- Translate -->
+                <div class="transform-box">
+                    <div class="transform-target target-translate">
+                        <img src="/image/openmoji-rocket.svg" alt="Translate">
+                    </div>
+                    <div style="font-weight: bold; margin-top: 8px;">translate(15px, -15px)</div>
+                    <small style="color: #64748b;">Hover to lift</small>
+                </div>
+
+                <!-- Transform Origin -->
+                <div class="transform-box">
+                    <div class="transform-target target-origin">
+                        <img src="/image/openmoji-puzzle.svg" alt="Origin">
+                    </div>
+                    <div style="font-weight: bold; margin-top: 8px;">transform-origin</div>
+                    <small style="color: #64748b;">top left anchor</small>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>.target {
+    transition: transform 0.4s ease;
+}
+.target:hover {
+    transform: rotate(45deg) scale(1.1);
+    transform-origin: center center; /* Default anchor */
+}</code></pre>
+        </div>
+
+        <!-- Section 2: 3D Flip Card -->
+        <div class="demo-card">
+            <h2>2. 3D Card Flip (Hover to Reveal)</h2>
+            <p>Using <code>perspective: 1000px;</code>, <code>transform-style: preserve-3d;</code>, and <code>backface-visibility: hidden;</code> to build a realistic 3D flipping card.</p>
+
+            <div class="demo-stage" style="min-height: 320px; display: flex; justify-content: center; align-items: center;">
+                <div class="flip-card-container">
+                    <div class="flip-card-inner">
+                        <!-- Front -->
+                        <div class="flip-card-front">
+                            <span class="badge badge-orange" style="margin-bottom: 12px;">Front Side</span>
+                            <img src="/image/openmoji-card.svg" width="90" height="90" alt="Card Front">
+                            <div style="font-weight: bold; margin-top: 14px;">Mystery Joker</div>
+                            <small style="color: #64748b;">Hover me to flip &rarr;</small>
+                        </div>
+                        <!-- Back -->
+                        <div class="flip-card-back">
+                            <span class="badge badge-teal" style="margin-bottom: 12px;">Back Side</span>
+                            <img src="/image/openmoji-superhero.svg" width="90" height="90" alt="Hero Revealed">
+                            <div style="font-weight: bold; margin-top: 14px;">Superhero Unlocked!</div>
+                            <small style="color: #94a3b8;">180&deg; Y-Axis Rotation</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>.card-container { perspective: 1000px; }
+.card-inner     { transform-style: preserve-3d; transition: transform 0.7s; }
+.card-container:hover .card-inner { transform: rotateY(180deg); }
+.front, .back   { backface-visibility: hidden; position: absolute; }
+.back           { transform: rotateY(180deg); }</code></pre>
+        </div>
+
+        <!-- Section 3: Isometric 3D Stack -->
+        <div class="demo-card">
+            <h2>3. Isometric 3D Layer Stack (Hover to Explode Layers)</h2>
+            <p>Simulate isometric 3D illustrations using combined 3D rotations and <code>translateZ</code> depth offsets.</p>
+
+            <div class="iso-stage">
+                <div class="iso-stack">
+                    <div class="iso-layer iso-layer-1">Base Layer (Z: 0)</div>
+                    <div class="iso-layer iso-layer-2">Data Layer (Z: 30)</div>
+                    <div class="iso-layer iso-layer-3">UI Layer (Z: 60)</div>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>.stack {
+    transform: rotateX(60deg) rotateZ(-45deg);
+    transform-style: preserve-3d;
+}
+.layer-1 { transform: translateZ(0px); }
+.layer-2 { transform: translateZ(30px); }
+.layer-3 { transform: translateZ(60px); }
+/* Hover expands the Z spacing between layers! */</code></pre>
+        </div>
+
+    </div>
+
+    <!-- Fixed Home Button -->
+    <a class="go-home-fixed" href="/index.html">Fixed 🏠</a>
+
+</body>
+</html>

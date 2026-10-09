@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Animation &amp; Transitions | Common Style Solution</title>
+    <link rel="stylesheet" href="/css/animation.css">
+</head>
+<body>
+
+    <div class="top-nav">
+        <a href="/index.html" class="nav-link-home">&larr; Back to Overview</a>
+        <span class="badge badge-teal">Chapter 04: Animation</span>
+    </div>
+
+    <div class="page-header">
+        <h1>CSS Animation &amp; Transitions</h1>
+        <p class="subtitle">Creating Delightful, Performant UI Motion: Hover States, Keyframes, Shimmer &amp; Tickers</p>
+    </div>
+
+    <div class="container">
+
+        <!-- Section 1: Transitions & Micro-Interactions -->
+        <div class="demo-card">
+            <h2>1. Smooth Transitions &amp; UI Interactions</h2>
+            <p>CSS transitions interpolate between property values during state changes (e.g., <code>:hover</code>, <code>:focus</code>, <code>:active</code>, or class toggles).</p>
+
+            <div class="demo-grid-2">
+                <!-- Interactive Button & Underline -->
+                <div class="demo-stage" style="display: flex; flex-direction: column; gap: 20px; align-items: flex-start; justify-content: center;">
+                    <button class="btn-hover-demo">Hover Me (Lift &amp; Glow)</button>
+
+                    <div>
+                        <a href="#demo" class="hover-underline-link" onclick="event.preventDefault()">Interactive Underline Slide &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Pure CSS Toggle Switch -->
+                <div class="demo-stage" style="display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 12px;">
+                    <label class="switch-container">
+                        <input type="checkbox" class="switch-checkbox" checked id="demoToggle">
+                        <span class="switch-slider"></span>
+                        <span style="font-weight: bold; font-size: 0.95rem;">Toggle Switch</span>
+                    </label>
+                    <small style="color: #64748b;">Pure CSS checkbox transition</small>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>/* Smooth button lift */
+.btn {
+    transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+.btn:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.18);
+}</code></pre>
+        </div>
+
+        <!-- Section 2: Keyframe Motion Library with OpenMoji -->
+        <div class="demo-card">
+            <h2>2. Keyframe Animations with OpenMoji</h2>
+            <p><code>@keyframes</code> gives complete control over the intermediate steps of an animation sequence.</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 1rem;">
+                
+                <!-- Floating Rocket -->
+                <div class="demo-stage" style="text-align: center; min-height: 180px;">
+                    <div class="rocket-floating">
+                        <img src="/image/openmoji-rocket.svg" width="68" height="68" alt="Rocket">
+                    </div>
+                    <div style="font-weight: bold; margin-top: 8px;">Float (Hovering)</div>
+                    <small style="color: #64748b;">3s ease-in-out infinite</small>
+                </div>
+
+                <!-- Infinite Spin Loader -->
+                <div class="demo-stage" style="text-align: center; min-height: 180px;">
+                    <div class="spin-infinite">
+                        <img src="/image/openmoji-transform.svg" width="68" height="68" alt="Loader">
+                    </div>
+                    <div style="font-weight: bold; margin-top: 8px;">Spin (Loader)</div>
+                    <small style="color: #64748b;">2s linear infinite</small>
+                </div>
+
+                <!-- Pulsing Heart -->
+                <div class="demo-stage" style="text-align: center; min-height: 180px;">
+                    <div class="pulse-heart">
+                        <img src="/image/openmoji-heart.svg" width="68" height="68" alt="Heart">
+                    </div>
+                    <div style="font-weight: bold; margin-top: 8px;">Heartbeat Pulse</div>
+                    <small style="color: #64748b;">1.6s ease-in-out infinite</small>
+                </div>
+
+                <!-- Error Shake -->
+                <div class="demo-stage" style="text-align: center; min-height: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                    <div id="shakeTarget" style="display: inline-block;">
+                        <img src="/image/openmoji-fire.svg" width="60" height="60" alt="Fire">
+                    </div>
+                    <button class="btn-control" style="margin-top: 10px;" onclick="triggerShake()">Trigger Shake</button>
+                    <small style="color: #64748b; margin-top: 4px;">Form error feedback</small>
+                </div>
+
+            </div>
+
+            <pre class="code-box"><code>@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(-5deg); }
+    50%      { transform: translateY(-18px) rotate(5deg); }
+}
+.floating-element {
+    animation: float 3s ease-in-out infinite;
+}</code></pre>
+        </div>
+
+        <!-- Section 3: Modern UI Skeleton Loading Shimmer -->
+        <div class="demo-card">
+            <h2>3. Skeleton Loading Shimmer Effect</h2>
+            <p>Modern apps (YouTube, Facebook, LinkedIn) display pulsating shimmer gradients instead of static spinners while content loads.</p>
+
+            <div class="demo-stage" style="display: flex; justify-content: center; align-items: center;">
+                <div class="skeleton-card">
+                    <div class="skeleton skeleton-avatar"></div>
+                    <div style="flex-grow: 1;">
+                        <div class="skeleton skeleton-line" style="width: 70%;"></div>
+                        <div class="skeleton skeleton-line" style="width: 100%;"></div>
+                        <div class="skeleton skeleton-line" style="width: 45%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>@keyframes shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position:  200% 0; }
+}
+.skeleton {
+    background: linear-gradient(90deg, #e2e8f0 25%, #f8fafc 50%, #e2e8f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+}</code></pre>
+        </div>
+
+        <!-- Section 4: Animated Gradient Text & Infinite Marquee -->
+        <div class="demo-card">
+            <h2>4. Animated Gradient Text &amp; Infinite Marquee</h2>
+            <p>Seamless loops that add energy and character to headers and announcements.</p>
+
+            <div style="text-align: center; margin: 1.5rem 0;">
+                <div class="animated-gradient-text">Pure CSS Animated Gradient</div>
+            </div>
+
+            <div style="margin-top: 1.5rem;">
+                <div style="font-weight: bold; margin-bottom: 6px; font-size: 0.9rem;">Infinite Ticker (Hover to Pause):</div>
+                <div class="marquee-container">
+                    <div class="marquee-content">
+                        <span>🚀 Rocket Speed</span>
+                        <span>🎨 OpenMoji Visuals</span>
+                        <span>💎 Pixel Perfection</span>
+                        <span>✨ Modern CSS3 Magic</span>
+                        <span>🚀 Rocket Speed</span>
+                        <span>🎨 OpenMoji Visuals</span>
+                        <span>💎 Pixel Perfection</span>
+                        <span>✨ Modern CSS3 Magic</span>
+                    </div>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>/* Infinite horizontal ticker */
+@keyframes marquee {
+    0%   { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+}
+.ticker {
+    display: inline-flex;
+    animation: marquee 12s linear infinite;
+}
+.ticker:hover {
+    animation-play-state: paused; /* Pause on mouse hover! */
+}</code></pre>
+        </div>
+
+    </div>
+
+    <!-- Fixed Home Button -->
+    <a class="go-home-fixed" href="/index.html">Fixed 🏠</a>
+
+    <script>
+        function triggerShake() {
+            const el = document.getElementById('shakeTarget');
+            el.classList.remove('shake-box');
+            void el.offsetWidth; // Force DOM reflow
+            el.classList.add('shake-box');
+        }
+    </script>
+</body>
+</html>

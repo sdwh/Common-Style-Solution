@@ -1,0 +1,227 @@
+@import url("basic.css");
+
+/* 1. Transitions */
+.btn-hover-demo {
+    background-color: #008080;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 0.95rem;
+    font-family: var(--font-mono);
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.btn-hover-demo:hover {
+    background-color: #005a5a;
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.18);
+}
+
+.btn-hover-demo:active {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.12);
+}
+
+/* Sliding Underline Effect */
+.hover-underline-link {
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
+    color: #1e293b;
+    padding-bottom: 4px;
+}
+
+.hover-underline-link::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 3px;
+    bottom: 0;
+    left: 0;
+    background-color: #008080;
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
+}
+
+.hover-underline-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+/* Toggle Switch */
+.switch-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.switch-checkbox {
+    display: none;
+}
+
+.switch-slider {
+    position: relative;
+    width: 52px;
+    height: 28px;
+    background-color: #cbd5e1;
+    border-radius: 34px;
+    transition: background-color 0.3s;
+}
+
+.switch-slider::before {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.switch-checkbox:checked + .switch-slider {
+    background-color: #008080;
+}
+
+.switch-checkbox:checked + .switch-slider::before {
+    transform: translateX(24px);
+}
+
+/* 2. Keyframes */
+/* Rocket Float */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) rotate(-5deg);
+    }
+    50% {
+        transform: translateY(-18px) rotate(5deg);
+    }
+}
+
+.rocket-floating {
+    animation: float 3s ease-in-out infinite;
+    display: inline-block;
+}
+
+/* Spin */
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.spin-infinite {
+    animation: spin 2s linear infinite;
+    display: inline-block;
+}
+
+/* Pulse Heartbeat */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    14% { transform: scale(1.2); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.25); }
+    70% { transform: scale(1); }
+}
+
+.pulse-heart {
+    animation: pulse 1.6s ease-in-out infinite;
+    display: inline-block;
+}
+
+/* Shake on Error */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+}
+
+.shake-box {
+    animation: shake 0.5s ease-in-out;
+}
+
+/* Skeleton Loading Shimmer */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.skeleton {
+    background: linear-gradient(90deg, #e2e8f0 25%, #f8fafc 50%, #e2e8f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+    border-radius: 4px;
+}
+
+.skeleton-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    padding: 16px;
+    border-radius: 8px;
+    display: flex;
+    gap: 14px;
+    max-width: 380px;
+}
+
+.skeleton-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.skeleton-line {
+    height: 14px;
+    margin-bottom: 8px;
+}
+
+/* Animated Gradient Text */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.animated-gradient-text {
+    background: linear-gradient(270deg, #ff007f, #7928ca, #0070f3, #00dfd8);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 4s ease infinite;
+    font-weight: bold;
+    font-size: 1.8rem;
+    display: inline-block;
+}
+
+/* Infinite Marquee */
+.marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    background: #1e293b;
+    padding: 12px 0;
+    border-radius: 6px;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+}
+
+.marquee-content {
+    display: inline-flex;
+    gap: 2rem;
+    animation: marquee 12s linear infinite;
+    color: white;
+    font-size: 1rem;
+    align-items: center;
+}
+
+.marquee-content:hover {
+    animation-play-state: paused;
+}

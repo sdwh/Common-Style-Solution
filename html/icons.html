@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Icons &amp; OpenMoji Guide | Common Style Solution</title>
+    <link rel="stylesheet" href="/css/icons.css">
+</head>
+<body>
+
+    <div class="top-nav">
+        <a href="/index.html" class="nav-link-home">&larr; Back to Overview</a>
+        <span class="badge badge-teal">Chapter 11: Icons &amp; Assets</span>
+    </div>
+
+    <div class="page-header">
+        <h1>Icons &amp; OpenMoji Guide</h1>
+        <p class="subtitle">Styling SVGs with CSS, currentColor Magic &amp; OpenMoji Library Integration</p>
+    </div>
+
+    <div class="container">
+
+        <!-- Section 1: SVG Styling with CSS & currentColor -->
+        <div class="demo-card">
+            <h2>1. SVG Styling with CSS &amp; currentColor Magic</h2>
+            <p>
+                By setting <code>stroke: currentColor;</code> or <code>fill: currentColor;</code> inside inline SVGs, the icon automatically inherits whatever font color is applied to its parent element — including on <code>:hover</code> states!
+            </p>
+
+            <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 1rem;">
+                <button class="currentcolor-btn" style="color: #2563eb;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <circle cx="12" cy="12" r="9" />
+                        <line x1="12" y1="8" x2="12.01" y2="8" />
+                        <polyline points="11 12 12 12 12 16 13 16" />
+                    </svg>
+                    <span>Blue Inherited</span>
+                </button>
+
+                <button class="currentcolor-btn" style="color: #dc2626;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                        <path d="M12 9v4" />
+                        <path d="M12 16v.01" />
+                    </svg>
+                    <span>Red Inherited</span>
+                </button>
+
+                <button class="currentcolor-btn" style="color: #059669;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M5 12l5 5l10 -10" />
+                    </svg>
+                    <span>Green Inherited</span>
+                </button>
+            </div>
+
+            <pre class="code-box"><code>/* SVG automatically adapts to hover text color */
+svg {
+    stroke: currentColor;
+    fill: none;
+    transition: transform 0.2s, stroke 0.2s;
+}
+button:hover {
+    color: teal; /* Both text AND icon turn teal instantly! */
+}</code></pre>
+        </div>
+
+        <!-- Section 2: OpenMoji Assets Showcase -->
+        <div class="demo-card">
+            <h2>2. OpenMoji Library Integration</h2>
+            <p>
+                <a href="https://openmoji.org/library/" target="_blank" rel="noopener" style="color: #008080; font-weight: bold; text-decoration: underline;">OpenMoji</a> provides thousands of open-source vector emoji SVGs categorized by standard Unicode hex codepoints. Below are the OpenMoji assets embedded in this demo website:
+            </p>
+
+            <div class="icon-gallery">
+                <div class="icon-card">
+                    <img src="/image/openmoji-rocket.svg" alt="Rocket">
+                    <span class="icon-label">Rocket</span>
+                    <span class="icon-code">1F680</span>
+                </div>
+                <div class="icon-card">
+                    <img src="/image/openmoji-palette.svg" alt="Palette">
+                    <span class="icon-label">Palette</span>
+                    <span class="icon-code">1F3A8</span>
+                </div>
+                <div class="icon-card">
+                    <img src="/image/openmoji-transform.svg" alt="Transform">
+                    <span class="icon-label">Transform</span>
+                    <span class="icon-code">1F504</span>
+                </div>
+                <div class="icon-card">
+                    <img src="/image/openmoji-scissors.svg" alt="Scissors">
+                    <span class="icon-label">Scissors</span>
+                    <span class="icon-code">2702</span>
+                </div>
+                <div class="icon-card">
+                    <img src="/image/openmoji-wand.svg" alt="Wand">
+                    <span class="icon-label">Magic Wand</span>
+                    <span class="icon-code">1FA84</span>
+                </div>
+                <div class="icon-card">
+                    <img src="/image/openmoji-mobile.svg" alt="Mobile">
+                    <span class="icon-label">Mobile</span>
+                    <span class="icon-code">1F4F1</span>
+                </div>
+                <div class="icon-card">
+                    <img src="/image/openmoji-controls.svg" alt="Controls">
+                    <span class="icon-label">Sliders</span>
+                    <span class="icon-code">1F39B</span>
+                </div>
+                <div class="icon-card">
+                    <img src="/image/openmoji-puzzle.svg" alt="Puzzle">
+                    <span class="icon-label">Puzzle</span>
+                    <span class="icon-code">1F9E9</span>
+                </div>
+                <div class="icon-card">
+                    <img src="/image/openmoji-superhero.svg" alt="Superhero">
+                    <span class="icon-label">Superhero</span>
+                    <span class="icon-code">1F9B8</span>
+                </div>
+                <div class="icon-card">
+                    <img src="/image/openmoji-ninja.svg" alt="Ninja">
+                    <span class="icon-label">Ninja</span>
+                    <span class="icon-code">1F977</span>
+                </div>
+                <div class="icon-card">
+                    <img src="/image/openmoji-robot.svg" alt="Robot">
+                    <span class="icon-label">Robot</span>
+                    <span class="icon-code">1F916</span>
+                </div>
+                <div class="icon-card">
+                    <img src="/image/openmoji-gem.svg" alt="Gem">
+                    <span class="icon-label">Crystal</span>
+                    <span class="icon-code">1F48E</span>
+                </div>
+            </div>
+
+            <div class="note-box">
+                🔗 <strong>Download link format:</strong> <code>https://raw.githubusercontent.com/hfg-gmuend/openmoji/master/color/svg/{HEX_CODE}.svg</code>
+            </div>
+        </div>
+
+        <!-- Section 3: Tabler Icons -->
+        <div class="demo-card">
+            <h2>3. Tabler Icons</h2>
+            <p>
+                The clean, geometric outline icons used for the main category cards on this website are from <a href="https://tablericons.com" target="_blank" rel="noopener" style="color: #008080; font-weight: bold; text-decoration: underline;">Tabler Icons</a> (100px size, 1px stroke width).
+            </p>
+
+            <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center; justify-content: center; background: #f8fafc; padding: 20px; border-radius: 8px;">
+                <div style="text-align: center;">
+                    <img src="/image/pictures.svg" width="60" height="60" alt="Position icon">
+                    <div style="font-size: 0.8rem; margin-top: 4px;">pictures.svg</div>
+                </div>
+                <div style="text-align: center;">
+                    <img src="/image/flex.svg" width="60" height="60" alt="Flex icon">
+                    <div style="font-size: 0.8rem; margin-top: 4px;">flex.svg</div>
+                </div>
+                <div style="text-align: center;">
+                    <img src="/image/grid.svg" width="60" height="60" alt="Grid icon">
+                    <div style="font-size: 0.8rem; margin-top: 4px;">grid.svg</div>
+                </div>
+                <div style="text-align: center;">
+                    <img src="/image/triangle-square-circle.svg" width="60" height="60" alt="Animation icon">
+                    <div style="font-size: 0.8rem; margin-top: 4px;">triangle-square-circle.svg</div>
+                </div>
+                <div style="text-align: center;">
+                    <img src="/image/bulb.svg" width="60" height="60" alt="Bulb icon">
+                    <div style="font-size: 0.8rem; margin-top: 4px;">bulb.svg</div>
+                </div>
+                <div style="text-align: center;">
+                    <img src="/image/stroke.svg" width="60" height="60" alt="Stroke icon">
+                    <div style="font-size: 0.8rem; margin-top: 4px;">stroke.svg</div>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>&lt;!-- Tabler Icon standard SVG markup --&gt;
+&lt;svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24"
+     stroke-width="1" stroke="#000000" fill="none"
+     stroke-linecap="round" stroke-linejoin="round"&gt;
+  &lt;path stroke="none" d="M0 0h24v24H0z" fill="none"/&gt;
+  &lt;!-- Path coordinates --&gt;
+&lt;/svg&gt;</code></pre>
+        </div>
+
+    </div>
+
+    <!-- Fixed Home Button -->
+    <a class="go-home-fixed" href="/index.html">Fixed 🏠</a>
+
+</body>
+</html>

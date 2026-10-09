@@ -4,71 +4,218 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flex</title>
+    <title>CSS Flexbox | Common Style Solution</title>
     <link rel="stylesheet" href="/css/flex.css">
-    <style>
-      .go-home-fixed {
-        position: fixed;
-        background-color: #007bff;
-        font-size: 1rem;
-        color: #fff;
-        padding: 10px;
-        border-radius: 2px;
-      }
-
-      .go-home-fixed:hover {
-        color: #fff;
-        background-color: #007baa;
-      }
-    </style>
 </head>
 <body>
-    <h1>Flex</h1>
 
-    <div class="list">
-        <div class="list-item">
-            <a href="#">
-                Position
-                <div class="list-img">
-                    <img src="/image/pictures.svg" class="img-fluid">
-                </div>
-              </a>
-        </div>
-        <div class="list-item">
-            <a href="#">
-                Flex
-                <div class="list-img">
-                    <img src="/image/flex.svg" class="img-fluid">
-                </div>
-              </a>
-        </div>
-        <div class="list-item">
-            <a href="#">
-                Grid
-                <div class="list-img">
-                    <img src="/image/grid.svg" class="img-fluid">
-                </div>
-              </a>
-        </div>
-        <div class="list-item">
-            <a href="#">
-                Animation
-                <div class="list-img">
-                    <img src="/image/triangle-square-circle.svg" class="img-fluid">
-                </div>
-              </a>
-        </div>
-        <div class="list-item">
-            <a href=#">
-                Icons
-                <div class="list-img">
-                    <img src="/image/bulb.svg" class="img-fluid">
-                </div>
-            </a>
-            <p class="text-sm">100px size, 1px stroke</p>
-        </div>        
+    <div class="top-nav">
+        <a href="/index.html" class="nav-link-home">&larr; Back to Overview</a>
+        <span class="badge badge-teal">Chapter 02: Flexbox</span>
     </div>
 
-    <a class="go-home-fixed" style="bottom:20px;right:20px" href="/index.html">Fixed</a>
+    <div class="page-header">
+        <h1>Flexbox Layout</h1>
+        <p class="subtitle">Mastering the 1-Dimensional Flexible Box Model with Live Controls &amp; Recipes</p>
+    </div>
+
+    <div class="container">
+
+        <!-- Section 1: Interactive Container Playground -->
+        <div class="demo-card">
+            <h2>1. Interactive Flex Container Playground</h2>
+            <p>Click the control buttons below to dynamically adjust <code>justify-content</code>, <code>align-items</code>, and <code>flex-direction</code> in real-time!</p>
+
+            <div style="margin-bottom: 1rem;">
+                <div style="font-weight: bold; font-size: 0.9rem; margin-bottom: 4px;">justify-content (Main Axis):</div>
+                <div class="controls-bar" id="justify-controls">
+                    <button class="btn-control active" onclick="setJustify('flex-start', this)">flex-start</button>
+                    <button class="btn-control" onclick="setJustify('center', this)">center</button>
+                    <button class="btn-control" onclick="setJustify('flex-end', this)">flex-end</button>
+                    <button class="btn-control" onclick="setJustify('space-between', this)">space-between</button>
+                    <button class="btn-control" onclick="setJustify('space-around', this)">space-around</button>
+                    <button class="btn-control" onclick="setJustify('space-evenly', this)">space-evenly</button>
+                </div>
+
+                <div style="font-weight: bold; font-size: 0.9rem; margin-bottom: 4px;">align-items (Cross Axis):</div>
+                <div class="controls-bar" id="align-controls">
+                    <button class="btn-control active" onclick="setAlign('stretch', this)">stretch</button>
+                    <button class="btn-control" onclick="setAlign('center', this)">center</button>
+                    <button class="btn-control" onclick="setAlign('flex-start', this)">flex-start</button>
+                    <button class="btn-control" onclick="setAlign('flex-end', this)">flex-end</button>
+                </div>
+
+                <div style="font-weight: bold; font-size: 0.9rem; margin-bottom: 4px;">flex-direction:</div>
+                <div class="controls-bar" id="direction-controls">
+                    <button class="btn-control active" onclick="setDirection('row', this)">row</button>
+                    <button class="btn-control" onclick="setDirection('row-reverse', this)">row-reverse</button>
+                    <button class="btn-control" onclick="setDirection('column', this)">column</button>
+                    <button class="btn-control" onclick="setDirection('column-reverse', this)">column-reverse</button>
+                </div>
+            </div>
+
+            <!-- Live Playground Stage -->
+            <div class="flex-playground" id="playground-stage">
+                <div class="flex-item">
+                    <img src="/image/openmoji-ninja.svg" alt="Ninja">
+                    <span>#1 Ninja</span>
+                </div>
+                <div class="flex-item">
+                    <img src="/image/openmoji-robot.svg" alt="Robot">
+                    <span>#2 Robot</span>
+                </div>
+                <div class="flex-item">
+                    <img src="/image/openmoji-superhero.svg" alt="Hero">
+                    <span>#3 Hero</span>
+                </div>
+                <div class="flex-item">
+                    <img src="/image/openmoji-mage.svg" alt="Mage">
+                    <span>#4 Mage</span>
+                </div>
+            </div>
+
+            <pre class="code-box" id="playground-code"><code>.container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-direction: row;
+    gap: 12px;
+}</code></pre>
+        </div>
+
+        <!-- Section 2: Flex Item Properties: grow, shrink, basis -->
+        <div class="demo-card">
+            <h2>2. Flex Items: flex-grow, flex-shrink &amp; flex-basis</h2>
+            <p><code>flex-grow</code> dictates what proportion of remaining available space each item claims.</p>
+
+            <div class="grow-demo-container">
+                <div class="grow-0">
+                    <strong>flex-grow: 0</strong><br>
+                    <small>Fixed width: 140px</small>
+                </div>
+                <div class="grow-1">
+                    <strong>flex-grow: 1</strong><br>
+                    <small>Takes 1 share of free space</small>
+                </div>
+                <div class="grow-2">
+                    <strong>flex-grow: 2</strong><br>
+                    <small>Takes 2 shares (2x wider!)</small>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>/* Container distributes remaining width according to grow ratios */
+.item-fixed  { flex-grow: 0; width: 140px; }
+.item-share1 { flex-grow: 1; }
+.item-share2 { flex-grow: 2; } /* 2x growth factor */</code></pre>
+        </div>
+
+        <!-- Section 3: Essential Flex Recipes -->
+        <div class="demo-card">
+            <h2>3. Practical Flexbox Recipes</h2>
+
+            <h3>Recipe A: The 2-Line Centering Trick</h3>
+            <p>Center anything horizontally and vertically with two flex properties:</p>
+            <div class="center-recipe-box">
+                <div style="background: #fff; padding: 12px 24px; border-radius: 6px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 12px;">
+                    <img src="/image/openmoji-gem.svg" width="36" height="36" alt="Gem">
+                    <div>
+                        <div style="font-weight: bold;">Perfect Center</div>
+                        <small style="color: #64748b;">justify-content: center; align-items: center;</small>
+                    </div>
+                </div>
+            </div>
+            <pre class="code-box"><code>.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}</code></pre>
+
+            <h3 style="margin-top: 2rem;">Recipe B: Navigation Bar with Auto Margins</h3>
+            <p>Using <code>margin-left: auto;</code> on a flex child automatically pushes it (and following siblings) to the far right end!</p>
+            <nav class="flex-nav">
+                <div class="nav-logo">
+                    <img src="/image/openmoji-puzzle.svg" width="32" height="32" alt="Logo">
+                    <span>FlexBrand</span>
+                </div>
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#docs">Docs</a>
+                    <a href="#showcase">Showcase</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </nav>
+            <pre class="code-box"><code>.nav-links {
+    margin-left: auto; /* Pushes the menu to the right! */
+    display: flex;
+    gap: 20px;
+}</code></pre>
+
+            <h3 style="margin-top: 2rem;">Recipe C: The Media Object</h3>
+            <p>An avatar image next to descriptive content. <code>flex-shrink: 0;</code> prevents the avatar from squishing when text grows large.</p>
+            <div class="media-object">
+                <img src="/image/openmoji-robot.svg" class="media-avatar" alt="Robot Avatar">
+                <div class="media-content">
+                    <div style="font-weight: bold; font-size: 1.05rem; margin-bottom: 4px;">Robo Assistant #42</div>
+                    <p style="margin: 0; color: #475569; font-size: 0.9rem;">
+                        Flexbox simplifies modern UI components. By setting <code>flex-shrink: 0</code> on the media avatar, it maintains its geometric proportions even in constrained screen viewports.
+                    </p>
+                </div>
+            </div>
+            <pre class="code-box"><code>.media-object { display: flex; align-items: flex-start; gap: 16px; }
+.media-avatar { flex-shrink: 0; width: 64px; height: 64px; }
+.media-content { flex-grow: 1; }</code></pre>
+        </div>
+
+    </div>
+
+    <!-- Fixed Home Button -->
+    <a class="go-home-fixed" href="/index.html">Fixed 🏠</a>
+
+    <script>
+        const stage = document.getElementById('playground-stage');
+        const codeEl = document.getElementById('playground-code');
+
+        let currentJustify = 'flex-start';
+        let currentAlign = 'stretch';
+        let currentDirection = 'row';
+
+        function updatePlayground() {
+            stage.style.justifyContent = currentJustify;
+            stage.style.alignItems = currentAlign;
+            stage.style.flexDirection = currentDirection;
+
+            codeEl.innerHTML = `<code>.container {
+    display: flex;
+    justify-content: ${currentJustify};
+    align-items: ${currentAlign};
+    flex-direction: ${currentDirection};
+    gap: 12px;
+}</code>`;
+        }
+
+        function setJustify(val, btn) {
+            currentJustify = val;
+            setActive(btn, 'justify-controls');
+            updatePlayground();
+        }
+
+        function setAlign(val, btn) {
+            currentAlign = val;
+            setActive(btn, 'align-controls');
+            updatePlayground();
+        }
+
+        function setDirection(val, btn) {
+            currentDirection = val;
+            setActive(btn, 'direction-controls');
+            updatePlayground();
+        }
+
+        function setActive(btn, containerId) {
+            const container = document.getElementById(containerId);
+            container.querySelectorAll('.btn-control').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+    </script>
 </body>
 </html>

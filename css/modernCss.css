@@ -1,0 +1,142 @@
+@import url("basic.css");
+
+/* Theme Switcher Demo Container */
+.theme-demo-box {
+    --demo-bg: #f8fafc;
+    --demo-card: #ffffff;
+    --demo-primary: #008080;
+    --demo-text: #1e293b;
+    --demo-border: #e2e8f0;
+
+    background-color: var(--demo-bg);
+    color: var(--demo-text);
+    padding: 24px;
+    border-radius: 8px;
+    border: 2px solid var(--demo-border);
+    transition: all 0.3s ease;
+}
+
+.theme-demo-box.theme-dark {
+    --demo-bg: #0f172a;
+    --demo-card: #1e293b;
+    --demo-primary: #38bdf8;
+    --demo-text: #f8fafc;
+    --demo-border: #334155;
+}
+
+.theme-demo-box.theme-teal {
+    --demo-bg: #f0fdfa;
+    --demo-card: #ccfbf1;
+    --demo-primary: #0d9488;
+    --demo-text: #134e4a;
+    --demo-border: #99f6e4;
+}
+
+.theme-demo-box.theme-cyber {
+    --demo-bg: #2e0854;
+    --demo-card: #4a154b;
+    --demo-primary: #f43f5e;
+    --demo-text: #fdf4ff;
+    --demo-border: #701a75;
+}
+
+.theme-card-preview {
+    background-color: var(--demo-card);
+    border: 1px solid var(--demo-border);
+    border-radius: 6px;
+    padding: 16px;
+    margin-top: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+}
+
+.theme-btn-preview {
+    background-color: var(--demo-primary);
+    color: #ffffff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Aspect-ratio Grid */
+.aspect-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 1rem;
+}
+
+.aspect-box {
+    background: #e2e8f0;
+    border: 2px dashed #94a3b8;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #334155;
+}
+
+.aspect-16-9 { aspect-ratio: 16 / 9; }
+.aspect-1-1  { aspect-ratio: 1 / 1; }
+.aspect-4-3  { aspect-ratio: 4 / 3; }
+
+/* Sibling dimming via :has() */
+.dimming-list {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    background: #f1f5f9;
+    border-radius: 8px;
+    margin-top: 1rem;
+}
+
+.dimming-item {
+    flex: 1;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 16px;
+    text-align: center;
+    transition: opacity 0.3s, transform 0.3s;
+    cursor: pointer;
+}
+
+/* When the list has a hovered child, dim all items EXCEPT the one being hovered! */
+.dimming-list:has(.dimming-item:hover) .dimming-item:not(:hover) {
+    opacity: 0.35;
+    transform: scale(0.95);
+}
+
+.dimming-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+/* Scroll Snap Carousel */
+.snap-carousel {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 16px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.snap-card {
+    flex: 0 0 220px;
+    scroll-snap-align: center;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}

@@ -1,61 +1,150 @@
-@import url("https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/cascadia-code.min.css");
-* {
-    box-sizing: border-box;
-}
+@import url("basic.css");
 
-body {
-    background-color: #eaeaea;
-    font-size: 2em;
-    padding: 0 2rem;
-    color: #2b2b2b;
-    font-family: 'Cascadia Code', sans-serif;
-}
-
-h1 {
-    text-align: center;
-}
-
-a {
-    color: #2b2b2b;
-    text-decoration:  none;
-}
-
-a:hover {
-    color: teal;
-}
-
-
-.list {
+/* Flex Playground Box */
+.flex-playground {
     display: flex;
-    justify-content: start;
-    flex-wrap: wrap;
-    gap: 20px 1%;
+    background-color: #f1f5f9;
+    border: 2px dashed #94a3b8;
+    border-radius: 6px;
+    padding: 1rem;
+    min-height: 200px;
+    transition: all 0.3s ease;
+    gap: 12px;
 }
 
-.list-item{
-    display: block;
-    background-color: #fff;
+/* Flex Demo Item */
+.flex-item {
+    background: #ffffff;
+    border: 2px solid #008080;
+    border-radius: 6px;
+    padding: 12px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 90px;
+    min-height: 90px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.06);
+    transition: all 0.3s ease;
+}
+
+.flex-item img {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 6px;
+}
+
+.flex-item span {
+    font-size: 0.85rem;
+    color: #334155;
+}
+
+/* Grow demos */
+.grow-demo-container {
+    display: flex;
+    gap: 10px;
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 12px;
+}
+
+.grow-1 {
+    flex-grow: 1;
+    background: #e0f2fe;
+    border: 2px solid #0284c7;
+    padding: 16px;
+    border-radius: 4px;
     text-align: center;
-    width: 24%;
-    padding: 10px;
-    border-radius: 2px;
+    font-size: 0.85rem;
 }
 
-.list-img {
+.grow-2 {
+    flex-grow: 2;
+    background: #dbeafe;
+    border: 2px solid #2563eb;
+    padding: 16px;
+    border-radius: 4px;
     text-align: center;
+    font-size: 0.85rem;
 }
 
-.img-fluid {
-    width: 100%;
-    max-width: 150px;
+.grow-0 {
+    flex-grow: 0;
+    background: #f1f5f9;
+    border: 2px solid #64748b;
+    padding: 16px;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 0.85rem;
+    width: 140px;
 }
 
-.text-sm {
-    font-size: 0.5em;
+/* Navbar Recipe */
+.flex-nav {
+    display: flex;
+    align-items: center;
+    background: #1e293b;
+    padding: 12px 20px;
+    border-radius: 6px;
+    color: white;
 }
 
-@media only screen and (max-width: 768px) {
-    .list-item{
-        width: 100%;
-    }
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.nav-links {
+    margin-left: auto; /* The flex auto-margin push */
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.nav-links a:hover {
+    color: #38bdf8;
+}
+
+/* Media Object Recipe */
+.media-object {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: #fff;
+    padding: 16px;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+}
+
+.media-avatar {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0; /* Prevents avatar squishing */
+    background: #f1f5f9;
+    border-radius: 50%;
+    padding: 6px;
+}
+
+.media-content {
+    flex-grow: 1;
+}
+
+/* Centering recipe stage */
+.center-recipe-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f1f5f9;
+    height: 180px;
+    border-radius: 6px;
 }

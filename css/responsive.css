@@ -1,0 +1,89 @@
+@import url("basic.css");
+
+/* Container Query demo */
+.resizable-wrapper {
+    resize: horizontal;
+    overflow: auto;
+    border: 2px dashed #008080;
+    border-radius: 8px;
+    padding: 16px;
+    background: #f8fafc;
+    min-width: 260px;
+    max-width: 100%;
+    width: 340px;
+    margin: 1rem 0;
+    container-type: inline-size;
+    container-name: card-container;
+}
+
+.cq-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 16px;
+    text-align: center;
+    gap: 12px;
+}
+
+.cq-card img {
+    width: 64px;
+    height: 64px;
+}
+
+/* Container query triggers when wrapper >= 380px */
+@container card-container (min-width: 380px) {
+    .cq-card {
+        flex-direction: row;
+        text-align: left;
+        padding: 20px;
+    }
+
+    .cq-card .cq-badge {
+        background-color: #dcfce7;
+        color: #166534;
+    }
+}
+
+/* Fluid clamp demo */
+.clamp-headline {
+    font-size: clamp(1.2rem, 3.5vw, 2.6rem);
+    font-weight: bold;
+    color: #008080;
+    line-height: 1.2;
+    margin: 12px 0;
+}
+
+/* Breakpoint pill display */
+.breakpoint-indicator {
+    background: #1e293b;
+    color: white;
+    padding: 14px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.bp-current::before {
+    content: "📱 Mobile (< 640px)";
+}
+
+@media (min-width: 640px) {
+    .bp-current::before {
+        content: "📱 Tablet Portrait (>= 640px)";
+    }
+}
+
+@media (min-width: 768px) {
+    .bp-current::before {
+        content: "💻 Tablet Landscape (>= 768px)";
+    }
+}
+
+@media (min-width: 1024px) {
+    .bp-current::before {
+        content: "🖥️ Desktop Screen (>= 1024px)";
+    }
+}

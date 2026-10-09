@@ -1,18 +1,33 @@
-.container {
+@import url("basic.css");
+
+/* =========================================
+   Original Pseudo-Element Demos (Preserved)
+   ========================================= */
+.legacy-container {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
-    margin-bottom: 20%;
+    margin-bottom: 2rem;
+    gap: 20px;
 }
 
-img {
-    width: 100%;
+.legacy-item {
+    text-align: center;
+    font-size: 0.95rem;
 }
 
 .relative {
     position: relative;
-    border: 2px solid red;
+    border: 2px solid #ef4444;
+    display: inline-block;
+    max-width: 260px;
+    border-radius: 4px;
+}
+
+.relative img {
+    width: 100%;
+    display: block;
 }
 
 .img-1::before {
@@ -23,7 +38,7 @@ img {
     border-radius: 50%;
     position: absolute;
     top: 0%;
-    left:0%;
+    left: 0%;
     z-index: -1;
 }
 
@@ -35,10 +50,9 @@ img {
     position: absolute;
     border-radius: 50%;
     top: -25%;
-    left:30%;
+    left: 30%;
     z-index: -1;
 }
-
 
 .img-3::before {
     content: "";
@@ -48,7 +62,7 @@ img {
     position: absolute;
     border-radius: 50%;
     top: 50%;
-    left:50%;
+    left: 50%;
     z-index: -1;
 }
 
@@ -59,7 +73,7 @@ img {
     padding-bottom: 100%;
     position: absolute;
     border-radius: 50%;
-    top:  0%;
+    top: 0%;
     left: 0%;
     z-index: -1;
     transform: translate(10%, 5%);
@@ -73,7 +87,7 @@ img {
     position: absolute;
     border-radius: 50%;
     top: 50%;
-    left:50%;
+    left: 50%;
     z-index: -1;
     transform: scale(.5);
 }
@@ -86,11 +100,183 @@ img {
     position: absolute;
     border-radius: 50%;
     top: 50%;
-    left:50%;
+    left: 50%;
     z-index: -1;
     transform: scale(1.5);
 }
 
 .overflow-hidden {
     overflow: hidden;
+}
+
+/* =========================================
+   Creative Pseudo-Elements: Tooltips & Badges
+   ========================================= */
+
+/* Pure CSS Tooltip with attr() */
+.has-tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    font-weight: bold;
+    color: #008080;
+    border-bottom: 1px dashed #008080;
+}
+
+.has-tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%) translateY(6px);
+    background-color: #1e293b;
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    z-index: 100;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.has-tooltip::before {
+    content: "";
+    position: absolute;
+    bottom: 105%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-top-color: #1e293b;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    z-index: 100;
+}
+
+.has-tooltip:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.has-tooltip:hover::before {
+    opacity: 1;
+}
+
+/* Ribbon Badge on Card */
+.ribbon-card {
+    position: relative;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 24px 20px;
+    overflow: hidden;
+}
+
+.ribbon {
+    position: absolute;
+    top: 15px;
+    right: -30px;
+    background: #ef4444;
+    color: white;
+    padding: 4px 35px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    transform: rotate(45deg);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    text-transform: uppercase;
+}
+
+/* Styled Blockquote */
+.fancy-quote {
+    position: relative;
+    padding: 20px 20px 20px 60px;
+    margin: 1rem 0;
+    background: #f8fafc;
+    border-left: 4px solid #008080;
+    border-radius: 4px;
+    font-style: italic;
+    color: #334155;
+}
+
+.fancy-quote::before {
+    content: "“";
+    position: absolute;
+    top: 5px;
+    left: 15px;
+    font-size: 3.5rem;
+    color: #008080;
+    line-height: 1;
+    font-family: Georgia, serif;
+    opacity: 0.6;
+}
+
+/* ::selection */
+.custom-selection::selection {
+    background-color: #008080;
+    color: #ffffff;
+}
+
+/* ::marker */
+.custom-list {
+    padding-left: 24px;
+}
+
+.custom-list li::marker {
+    content: "✨ ";
+    font-size: 1.1rem;
+}
+
+/* =========================================
+   Modern Pseudo-Classes: :has(), :is(), :nth-child
+   ========================================= */
+
+/* Parent selector with :has() */
+.interactive-card {
+    background: #ffffff;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 16px;
+    transition: all 0.25s ease;
+}
+
+/* When checkbox inside is checked, style the parent container! */
+.interactive-card:has(input[type="checkbox"]:checked) {
+    border-color: #008080;
+    background-color: #f0fdfa;
+    box-shadow: 0 4px 12px rgba(0, 128, 128, 0.15);
+    transform: translateY(-2px);
+}
+
+/* nth-child pattern demo */
+.nth-demo-list {
+    display: flex;
+    gap: 8px;
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.nth-demo-list li {
+    background: #e2e8f0;
+    padding: 12px 18px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.nth-demo-list li:nth-child(even) {
+    background: #bfdbfe;
+    color: #1e40af;
+    border: 1px solid #93c5fd;
+}
+
+.nth-demo-list li:first-child {
+    border-left: 4px solid #008080;
+}
+
+.nth-demo-list li:last-child {
+    border-right: 4px solid #ef4444;
 }
