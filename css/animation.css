@@ -225,3 +225,67 @@
 .marquee-content:hover {
     animation-play-state: paused;
 }
+
+/* =========================================
+   Features from css-research.md
+   ========================================= */
+
+/* Feature 25: Scroll-driven Animations */
+@keyframes scrollProgressBar {
+    from { width: 0%; }
+    to { width: 100%; }
+}
+
+.scroll-indicator-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #008080, #38bdf8, #f43f5e);
+    z-index: 10000;
+    animation: scrollProgressBar auto linear;
+    animation-timeline: scroll(root block);
+    width: 0%;
+}
+
+/* Feature 26: Discrete Property Animation with @starting-style */
+.discrete-box {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.4s ease, transform 0.4s ease, display 0.4s allow-discrete;
+    background: #f0fdfa;
+    border: 2px solid #0d9488;
+    padding: 16px;
+    border-radius: 6px;
+    margin-top: 12px;
+}
+
+.discrete-box.is-hidden {
+    display: none;
+    opacity: 0;
+    transform: translateY(10px);
+}
+
+@starting-style {
+    .discrete-box:not(.is-hidden) {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+/* Feature 28: pointer-events: none */
+.click-through-layer {
+    position: relative;
+    display: inline-block;
+}
+
+.click-through-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* Mouse clicks pass right through! */
+    width: 20px;
+    height: 20px;
+}

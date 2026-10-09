@@ -1,33 +1,52 @@
 @import url("basic.css");
 
 /* =========================================
-   Original Pseudo-Element Demos (Preserved)
+   1. Decorative ::before Background Shapes
+   (Fixed with isolation: isolate!)
    ========================================= */
-.legacy-container {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-bottom: 2rem;
-    gap: 20px;
+
+.legacy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px 24px;
+    padding: 30px 10px;
+    overflow: hidden; /* Prevents protruding shapes from escaping the card */
 }
 
 .legacy-item {
     text-align: center;
     font-size: 0.95rem;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
+.legacy-label {
+    margin-top: 14px;
+    font-weight: bold;
+    font-family: var(--font-mono);
+    color: #1e293b;
+}
+
+/* The crucial fix: isolation: isolate creates a new stacking context
+   so that z-index: -1 stays in front of the card background but behind <img> */
 .relative {
     position: relative;
     border: 2px solid #ef4444;
     display: inline-block;
-    max-width: 260px;
+    width: 220px;
+    max-width: 100%;
     border-radius: 4px;
+    isolation: isolate; /* <<-- FIXES STACKING CONTEXT! */
+    background: transparent;
 }
 
 .relative img {
     width: 100%;
     display: block;
+    position: relative;
+    z-index: 1; /* Ensures image is in front */
 }
 
 .img-1::before {
@@ -89,7 +108,7 @@
     top: 50%;
     left: 50%;
     z-index: -1;
-    transform: scale(.5);
+    transform: scale(0.5);
 }
 
 .img-6::before {
@@ -110,10 +129,137 @@
 }
 
 /* =========================================
-   Creative Pseudo-Elements: Tooltips & Badges
+   2. Selectors from css-research.md
    ========================================= */
 
-/* Pure CSS Tooltip with attr() */
+/* Feature 13: :has() Parent Selector */
+.card-has-demo {
+    background: #ffffff;
+    border: 2px solid #cbd5e1;
+    border-radius: 8px;
+    padding: 16px;
+    transition: all 0.25s ease;
+}
+
+.card-has-demo:has(input[type="checkbox"]:checked) {
+    border-color: #008080;
+    background-color: #f0fdfa;
+    box-shadow: 0 4px 12px rgba(0, 128, 128, 0.18);
+    transform: translateY(-2px);
+}
+
+/* Form validation via :has() */
+.form-has-demo {
+    padding: 16px;
+    border-radius: 8px;
+    background: #f8fafc;
+    border: 2px solid #cbd5e1;
+    transition: border-color 0.3s;
+}
+
+.form-has-demo:has(input:invalid:not(:placeholder-shown)) {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+}
+
+/* Feature 14: :is() vs :where() */
+:is(.is-where-box, .is-where-alt) a:hover {
+    color: #008080;
+    text-decoration: underline;
+}
+
+:where(.reset-heading-demo) {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #008080;
+}
+
+/* Feature 15: :focus-visible */
+.btn-focus-demo {
+    background: #008080;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    cursor: pointer;
+}
+
+.btn-focus-demo:focus {
+    outline: none; /* Mouse click removes outline */
+}
+
+.btn-focus-demo:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 3px; /* Keyboard Tab triggers clear ring */
+}
+
+/* Feature 16: :user-valid & :user-invalid */
+.input-user-state {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid #cbd5e1;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.input-user-state:user-valid {
+    border-color: #10b981;
+    background-color: #f0fdf4;
+}
+
+.input-user-state:user-invalid {
+    border-color: #ef4444;
+    background-color: #fef2f2;
+}
+
+/* Feature 17: ::backdrop & Top Layer <dialog> */
+dialog.custom-dialog {
+    border: none;
+    border-radius: 8px;
+    padding: 24px 30px;
+    background: #ffffff;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    max-width: 480px;
+    width: 90%;
+    font-family: var(--font-mono);
+}
+
+dialog.custom-dialog::backdrop {
+    background-color: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+/* Feature 18: ::marker */
+.research-markers {
+    padding-left: 24px;
+    line-height: 1.8;
+}
+
+.research-markers li::marker {
+    color: #008080;
+    font-size: 1.2em;
+    content: "⚡ ";
+}
+
+/* Feature 36: initial-letter (Drop Cap) */
+.drop-cap-p::first-letter {
+    -webkit-initial-letter: 3 2;
+    initial-letter: 3 2;
+    color: #008080;
+    font-weight: bold;
+    font-size: 2.8rem;
+    float: left;
+    line-height: 0.8;
+    margin-right: 10px;
+    padding-top: 4px;
+}
+
+/* Pure CSS Tooltip with attr() & ::after */
 .has-tooltip {
     position: relative;
     display: inline-block;
@@ -165,7 +311,7 @@
     opacity: 1;
 }
 
-/* Ribbon Badge on Card */
+/* Ribbon Badge */
 .ribbon-card {
     position: relative;
     background: #fff;
@@ -187,96 +333,4 @@
     transform: rotate(45deg);
     box-shadow: 0 2px 4px rgba(0,0,0,0.15);
     text-transform: uppercase;
-}
-
-/* Styled Blockquote */
-.fancy-quote {
-    position: relative;
-    padding: 20px 20px 20px 60px;
-    margin: 1rem 0;
-    background: #f8fafc;
-    border-left: 4px solid #008080;
-    border-radius: 4px;
-    font-style: italic;
-    color: #334155;
-}
-
-.fancy-quote::before {
-    content: "“";
-    position: absolute;
-    top: 5px;
-    left: 15px;
-    font-size: 3.5rem;
-    color: #008080;
-    line-height: 1;
-    font-family: Georgia, serif;
-    opacity: 0.6;
-}
-
-/* ::selection */
-.custom-selection::selection {
-    background-color: #008080;
-    color: #ffffff;
-}
-
-/* ::marker */
-.custom-list {
-    padding-left: 24px;
-}
-
-.custom-list li::marker {
-    content: "✨ ";
-    font-size: 1.1rem;
-}
-
-/* =========================================
-   Modern Pseudo-Classes: :has(), :is(), :nth-child
-   ========================================= */
-
-/* Parent selector with :has() */
-.interactive-card {
-    background: #ffffff;
-    border: 2px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 16px;
-    transition: all 0.25s ease;
-}
-
-/* When checkbox inside is checked, style the parent container! */
-.interactive-card:has(input[type="checkbox"]:checked) {
-    border-color: #008080;
-    background-color: #f0fdfa;
-    box-shadow: 0 4px 12px rgba(0, 128, 128, 0.15);
-    transform: translateY(-2px);
-}
-
-/* nth-child pattern demo */
-.nth-demo-list {
-    display: flex;
-    gap: 8px;
-    list-style: none;
-    padding: 0;
-    margin: 1rem 0;
-}
-
-.nth-demo-list li {
-    background: #e2e8f0;
-    padding: 12px 18px;
-    border-radius: 4px;
-    font-weight: bold;
-    font-size: 0.9rem;
-}
-
-.nth-demo-list li:nth-child(even) {
-    background: #bfdbfe;
-    color: #1e40af;
-    border: 1px solid #93c5fd;
-}
-
-.nth-demo-list li:first-child {
-    border-left: 4px solid #008080;
-}
-
-.nth-demo-list li:last-child {
-    border-right: 4px solid #ef4444;
 }

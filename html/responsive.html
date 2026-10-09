@@ -121,6 +121,27 @@ h1 {
 }</code></pre>
         </div>
 
+        <!-- Section 5: Mobile Safe Area Insets (#46 from css-research.md) -->
+        <div class="demo-card">
+            <h2>5. Mobile Safe Area Insets: env() (#46)</h2>
+            <p>
+                Prevent mobile notches, dynamic islands, and bottom home indicators from obscuring fixed footers using <code>env(safe-area-inset-*)</code>.
+            </p>
+
+            <div style="background: #1e293b; color: white; padding: 14px 20px; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
+                <span>Fixed Mobile Bar</span>
+                <span class="badge badge-teal">padding-bottom: env(safe-area-inset-bottom, 16px)</span>
+            </div>
+
+            <pre class="code-box"><code>.fixed-mobile-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding-bottom: env(safe-area-inset-bottom, 16px);
+}</code></pre>
+        </div>
+
     </div>
 
     <!-- Fixed Home Button -->

@@ -106,7 +106,6 @@
     cursor: pointer;
 }
 
-/* When the list has a hovered child, dim all items EXCEPT the one being hovered! */
 .dimming-list:has(.dimming-item:hover) .dimming-item:not(:hover) {
     opacity: 0.35;
     transform: scale(0.95);
@@ -139,4 +138,101 @@
     padding: 20px;
     text-align: center;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* =========================================
+   Features from css-research.md
+   ========================================= */
+
+/* Feature 9: Native CSS Nesting */
+.nesting-card {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 16px;
+
+    & h4 {
+        margin: 0 0 6px 0;
+        color: #008080;
+    }
+
+    & .nested-btn {
+        background: #008080;
+        color: white;
+        border: none;
+        padding: 6px 14px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-family: var(--font-mono);
+
+        &:hover {
+            background: #005a5a;
+        }
+    }
+}
+
+/* Feature 31: color-mix() */
+.mixed-color-box {
+    background-color: color-mix(in srgb, #008080 75%, white);
+    color: #115e59;
+    padding: 14px;
+    border-radius: 6px;
+    border: 1px solid #99f6e4;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+/* Feature 33: text-wrap: balance & pretty */
+.text-balance-demo {
+    text-wrap: balance;
+    font-size: 1.15rem;
+    font-weight: bold;
+    color: #1e293b;
+    max-width: 320px;
+    background: #f1f5f9;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+.text-pretty-demo {
+    text-wrap: pretty;
+    font-size: 0.85rem;
+    color: #475569;
+    max-width: 320px;
+    background: #f1f5f9;
+    padding: 8px;
+    border-radius: 4px;
+    margin-top: 8px;
+}
+
+/* Feature 34: Multi-line text clamp */
+.truncate-multiline {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 0.85rem;
+    color: #475569;
+    line-height: 1.5;
+    background: #f8fafc;
+    padding: 10px;
+    border-left: 3px solid #008080;
+}
+
+/* Feature 35: tabular-nums */
+.tabular-timer {
+    font-variant-numeric: tabular-nums;
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #008080;
+    font-family: var(--font-mono);
+}
+
+/* Feature 41: content-visibility */
+.performance-item {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 80px;
+    padding: 12px;
+    background: #fff;
+    border-bottom: 1px solid #e2e8f0;
 }

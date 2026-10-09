@@ -198,6 +198,51 @@
 }</code></pre>
         </div>
 
+        <!-- Section 5: Subgrid (#3 from css-research.md) -->
+        <div class="demo-card">
+            <h2>5. Subgrid: Nested Subgrids (#3)</h2>
+            <p>
+                <code>grid-template-rows: subgrid;</code> allows child cards to inherit their parent's grid row tracks. Notice how all card headers, varying-length bodies, and footers align horizontally across all 3 cards!
+            </p>
+
+            <div class="subgrid-parent">
+                <!-- Card 1 -->
+                <div class="subgrid-card">
+                    <div class="subgrid-header">Card A (Short Header)</div>
+                    <div class="subgrid-body">A brief paragraph that only takes one sentence.</div>
+                    <div class="subgrid-footer"><button class="btn-control">Action &rarr;</button></div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="subgrid-card">
+                    <div class="subgrid-header">Card B (Longer Title Spanning Multiple Lines)</div>
+                    <div class="subgrid-body">
+                        This card has much longer text with detailed explanations, yet the footer below remains aligned with the other cards on the exact same row track!
+                    </div>
+                    <div class="subgrid-footer"><button class="btn-control">Action &rarr;</button></div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="subgrid-card">
+                    <div class="subgrid-header">Card C (Standard)</div>
+                    <div class="subgrid-body">Balanced description showcasing subgrid alignment.</div>
+                    <div class="subgrid-footer"><button class="btn-control">Action &rarr;</button></div>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>.card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto 1fr auto;
+}
+.card {
+    display: grid;
+    grid-template-rows: subgrid; /* Inherits parent tracks! */
+    grid-row: span 3;           /* Spans header, body, footer */
+}</code></pre>
+        </div>
+
+
     </div>
 
     <!-- Fixed Home Button -->

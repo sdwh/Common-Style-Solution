@@ -143,3 +143,38 @@
 .filter-target {
     transition: filter 0.3s ease;
 }
+
+/* Feature 22: mask-image */
+.fade-mask-box {
+    background: #1e293b;
+    color: white;
+    padding: 20px;
+    border-radius: 6px;
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    max-height: 140px;
+    overflow: hidden;
+}
+
+/* Feature 30: Oklch Color Space */
+.oklch-swatch-grid {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+}
+
+.oklch-swatch {
+    flex: 1;
+    min-width: 120px;
+    height: 70px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+

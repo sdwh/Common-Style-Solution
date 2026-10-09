@@ -128,3 +128,46 @@
     height: 180px;
     border-radius: 6px;
 }
+
+/* Feature 3: Subgrid Card System */
+.subgrid-parent {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto 1fr auto;
+    gap: 16px;
+    background: #f8fafc;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+}
+
+.subgrid-card {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 3;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+
+.subgrid-header {
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 8px;
+    font-weight: bold;
+    color: #008080;
+}
+
+.subgrid-body {
+    padding: 12px 0;
+    font-size: 0.85rem;
+    color: #475569;
+}
+
+.subgrid-footer {
+    border-top: 1px solid #f1f5f9;
+    padding-top: 8px;
+    text-align: right;
+}
+

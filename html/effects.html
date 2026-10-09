@@ -137,6 +137,51 @@
             <pre class="code-box" id="filterCode"><code>.target { filter: none; }</code></pre>
         </div>
 
+        <!-- Section 5: mask-image & oklch() (#22, #30 from css-research.md) -->
+        <div class="demo-card">
+            <h2>5. Gradient Masking &amp; OKLCH Color Space (#22, #30)</h2>
+            <p>
+                <strong>mask-image:</strong> Apply alpha masks using gradients to create smooth fade-out edges.
+                <br><strong>oklch():</strong> Perceptually uniform color space where hue changes preserve constant perceived luminance.
+            </p>
+
+            <div class="demo-grid-2">
+                <!-- mask-image demo -->
+                <div>
+                    <div style="font-weight: bold; margin-bottom: 6px;">mask-image Fade-Out Mask:</div>
+                    <div class="fade-mask-box">
+                        <h4 style="margin: 0 0 6px 0; color: #38bdf8;">Fade-out Text Scroller</h4>
+                        <p style="margin: 0; font-size: 0.85rem; line-height: 1.6;">
+                            Using <code>mask-image: linear-gradient(to bottom, black 50%, transparent 100%)</code> gracefully fades out overflowing content at the bottom without needing absolute positioned gradient overlays!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- oklch demo -->
+                <div>
+                    <div style="font-weight: bold; margin-bottom: 6px;">oklch() Perceptually Uniform Palette:</div>
+                    <div class="oklch-swatch-grid">
+                        <div class="oklch-swatch" style="background-color: oklch(0.65 0.24 30);">oklch(30&deg;)</div>
+                        <div class="oklch-swatch" style="background-color: oklch(0.65 0.24 140);">oklch(140&deg;)</div>
+                        <div class="oklch-swatch" style="background-color: oklch(0.65 0.24 250);">oklch(250&deg;)</div>
+                    </div>
+                    <small style="color: #64748b; display: block; margin-top: 6px;">
+                        All swatches share identical perceived lightness (0.65) and chroma (0.24), varying only in hue angle!
+                    </small>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>/* Fade-out alpha mask */
+.fade-box {
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+}
+
+/* Modern perceptually uniform colors */
+.swatch {
+    background-color: oklch(0.65 0.24 140); /* Lightness, Chroma, Hue */
+}</code></pre>
+        </div>
+
     </div>
 
     <!-- Fixed Home Button -->

@@ -316,6 +316,63 @@
 .blue  { position: absolute; z-index: 3; } /* On top of red &amp; green */</code></pre>
         </div>
 
+        <!-- Section 7: Modern Anchor Positioning & Logical Inset (#4, #7) -->
+        <div class="demo-card">
+            <h2>7. Modern Anchor Positioning &amp; Inset (#4, #7)</h2>
+            <p>
+                <strong>CSS Anchor Positioning:</strong> Anchor a floating element to any reference element without JavaScript!
+                <br><strong>Logical Inset:</strong> <code>inset: 0</code> cleanly replaces setting <code>top: 0; right: 0; bottom: 0; left: 0;</code>.
+            </p>
+
+            <div class="demo-stage" style="min-height: 140px; display: flex; align-items: center; justify-content: center; position: relative;">
+                <button class="btn btn-primary" style="anchor-name: --action-anchor; position: relative;">
+                    Anchor Target Button
+                </button>
+                <div style="position: absolute; position-anchor: --action-anchor; bottom: calc(100% + 10px); background: #1e293b; color: white; padding: 6px 14px; border-radius: 4px; font-size: 0.8rem; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                    ✨ Attached via position-anchor
+                </div>
+            </div>
+
+            <pre class="code-box"><code>/* Anchor Positioning API (Zero JS Popper!) */
+.button  { anchor-name: --my-button; }
+.tooltip {
+    position: absolute;
+    position-anchor: --my-button;
+    bottom: anchor(top);
+    left: anchor(center);
+    transform: translateX(-50%);
+}
+
+/* Logical Inset Shorthand */
+.modal-overlay { position: fixed; inset: 0; }</code></pre>
+        </div>
+
+        <!-- Section 8: Multi-Column Layout & Scroll Bounds (#5, #39, #40) -->
+        <div class="demo-card">
+            <h2>8. Multi-Column Layout &amp; Scroll Behavior (#5, #39, #40)</h2>
+            <p>
+                Magazine style multi-column text distribution (<code>column-count: 3</code>), paired with <code>scroll-margin-top</code> to prevent sticky headers from covering anchor targets, and <code>overscroll-behavior: contain</code> to stop scroll chaining.
+            </p>
+
+            <div style="column-count: 3; column-gap: 2rem; column-rule: 1px solid #cbd5e1; font-size: 0.85rem; color: #334155; line-height: 1.6;">
+                CSS Multi-column Layout enables flowing continuous text into magazine-like columns automatically. As viewport dimensions change, lines redistribute naturally into adjacent columns.
+                When navigating via in-page hash links, <code>scroll-margin-top: 80px</code> prevents sticky navigation bars from hiding headings.
+                Furthermore, setting <code>overscroll-behavior: contain</code> on modal dialogs stops the background page from scrolling once the modal reaches its end!
+            </div>
+
+            <pre class="code-box"><code>/* Newspaper Multi-column */
+.article {
+    column-count: 3;
+    column-gap: 2rem;
+    column-rule: 1px solid #cbd5e1;
+}
+
+/* Sticky Header Offset &amp; Scroll Containment */
+section[id] { scroll-margin-top: 80px; }
+.modal-body { overscroll-behavior: contain; }</code></pre>
+        </div>
+
+
     </div>
 
     <!-- Fixed Home Button -->

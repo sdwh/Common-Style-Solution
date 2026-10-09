@@ -165,6 +165,98 @@
 }</code></pre>
         </div>
 
+        <!-- Section 5: Architecture Features (#9, #10, #12 from css-research.md) -->
+        <div class="demo-card">
+            <h2>5. Modern Architecture: Nesting, @layer &amp; @scope (#9, #10, #12)</h2>
+            <p>
+                Modern CSS supports native nesting without preprocessors, cascade layers (<code>@layer</code>) for controlling specificity wars, and scoped styles (<code>@scope</code>).
+            </p>
+
+            <div class="demo-grid-2">
+                <!-- Native Nesting Demo -->
+                <div class="nesting-card">
+                    <h4>Native CSS Nesting</h4>
+                    <p style="font-size: 0.85rem; color: #475569; margin: 4px 0 10px 0;">
+                        No Sass/Less required! <code>&amp;</code> syntax works natively in evergreen browsers.
+                    </p>
+                    <button class="nested-btn">Hover Nested Button</button>
+                </div>
+
+                <!-- Cascade Layers & Scope -->
+                <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 6px; padding: 16px;">
+                    <h4 style="margin: 0 0 6px 0; color: #008080;">@layer &amp; @scope Architecture</h4>
+                    <p style="font-size: 0.85rem; color: #475569; margin: 0;">
+                        <code>@layer components { .btn { ... } }</code> guarantees priority order regardless of selector weight. <code>@scope (.card) to (.content)</code> creates donut scopes that don't leak styles!
+                    </p>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>/* Native CSS Nesting */
+.card {
+    background: #f8fafc;
+    & .btn {
+        background: teal;
+        &:hover { background: darkcyan; }
+    }
+}
+
+/* Cascade Layers &amp; Scoped Styles */
+@layer reset, base, components, utilities;
+@scope (.card) to (.card-body) { p { color: #475569; } }</code></pre>
+        </div>
+
+        <!-- Section 6: Color Mixing & Typography Refinement (#31, #33, #34, #35, #41) -->
+        <div class="demo-card">
+            <h2>6. Color Mixing, Typography &amp; Performance (#31, #33, #34, #35, #41)</h2>
+
+            <div class="demo-grid-2">
+                <!-- color-mix & Tabular numbers -->
+                <div>
+                    <div style="font-weight: bold; margin-bottom: 6px;">color-mix(in srgb, teal 75%, white):</div>
+                    <div class="mixed-color-box">
+                        🎨 Blended purely in CSS with color-mix()
+                    </div>
+
+                    <div style="margin-top: 16px;">
+                        <div style="font-weight: bold; margin-bottom: 4px;">font-variant-numeric: tabular-nums:</div>
+                        <div class="tabular-timer" id="timerDisplay">00:00:00</div>
+                        <small style="color: #64748b;">Monospaced numbers prevent jitter during counter updates!</small>
+                    </div>
+                </div>
+
+                <!-- text-wrap balance & line-clamp -->
+                <div>
+                    <div style="font-weight: bold; margin-bottom: 6px;">text-wrap: balance vs pretty:</div>
+                    <div class="text-balance-demo">
+                        Balanced Headline That Automatically Avoids Ugly Single-Word Orphans
+                    </div>
+
+                    <div style="margin-top: 14px;">
+                        <div style="font-weight: bold; margin-bottom: 4px;">-webkit-line-clamp: 3 (Multiline Truncate):</div>
+                        <div class="truncate-multiline">
+                            This paragraph contains an extensive amount of explanatory documentation regarding modern CSS layout and typographic features. Instead of running on indefinitely or requiring JavaScript string substring operations, CSS automatically truncates overflowing content after exactly three lines with an ellipsis.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>/* Native Color Mixing */
+.mixed { background: color-mix(in srgb, var(--primary) 75%, white); }
+
+/* Typography Balancers &amp; Monospace Numerals */
+h1 { text-wrap: balance; }
+p  { text-wrap: pretty; }
+.timer { font-variant-numeric: tabular-nums; }
+
+/* Multiline Truncation */
+.clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}</code></pre>
+        </div>
+
     </div>
 
     <!-- Fixed Home Button -->
@@ -180,6 +272,17 @@
             document.querySelectorAll('#theme-controls .btn-control').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
         }
+
+        // Live timer for tabular-nums demo
+        setInterval(() => {
+            const now = new Date();
+            const h = String(now.getHours()).padStart(2, '0');
+            const m = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            const ms = String(Math.floor(now.getMilliseconds() / 10)).padStart(2, '0');
+            const el = document.getElementById('timerDisplay');
+            if (el) el.textContent = `${h}:${m}:${s}.${ms}`;
+        }, 50);
     </script>
 </body>
 </html>

@@ -17,23 +17,30 @@
 
     <div class="page-header">
         <h1>Pseudo Classes &amp; Elements</h1>
-        <p class="subtitle">Exploring ::before, ::after, Tooltips, :has(), and Advanced Selectors</p>
+        <p class="subtitle">::before, ::after, :has(), :is(), :where(), :focus-visible, :user-invalid, ::backdrop &amp; initial-letter</p>
     </div>
 
     <div class="container">
 
-        <!-- Section 1: Preserved Original Decorative ::before Demos -->
+        <!-- Section 1: Preserved Original Decorative ::before Demos (Fixed!) -->
         <div class="demo-card">
             <h2>1. Decorative ::before Background Shapes</h2>
-            <p>Using pseudo-elements to render decorative geometry behind images using <code>z-index: -1</code> and various transform/position offsets.</p>
+            <p>
+                Using pseudo-elements to render decorative geometry behind images using <code>z-index: -1</code> and various transform/position offsets.
+            </p>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 1.5rem;">
+            <div class="note-box" style="margin-bottom: 1.5rem;">
+                💡 <strong>Stacking Context Fix (isolation: isolate):</strong>
+                Notice that by adding <code>isolation: isolate</code> to <code>.relative</code>, each element forms its own independent stacking context. This ensures the khaki <code>::before</code> circles sit behind the <code>&lt;img&gt;</code> but <strong>stay in front of the card background</strong>, rather than disappearing underneath the container!
+            </div>
+
+            <div class="legacy-grid">
                 <!-- Demo 1 -->
                 <div class="legacy-item">
                     <div class="relative img-1">
                         <img src="/image/undraw_Certificate_re_yadi.png" alt="Certificate">
                     </div>
-                    <div style="margin-top: 8px; font-weight: bold;">top: 0% left: 0%</div>
+                    <div class="legacy-label">top: 0% left: 0%</div>
                 </div>
 
                 <!-- Demo 2 -->
@@ -41,7 +48,7 @@
                     <div class="relative img-2">
                         <img src="/image/undraw_Certificate_re_yadi.png" alt="Certificate">
                     </div>
-                    <div style="margin-top: 8px; font-weight: bold;">top: -25% left: 30%</div>
+                    <div class="legacy-label">top: -25% left: 30%</div>
                 </div>
 
                 <!-- Demo 3 -->
@@ -49,7 +56,7 @@
                     <div class="relative img-3">
                         <img src="/image/undraw_Certificate_re_yadi.png" alt="Certificate">
                     </div>
-                    <div style="margin-top: 8px; font-weight: bold;">top: 50% left: 50%</div>
+                    <div class="legacy-label">top: 50% left: 50%</div>
                 </div>
 
                 <!-- Demo 4 -->
@@ -57,7 +64,7 @@
                     <div class="relative img-4">
                         <img src="/image/undraw_Certificate_re_yadi.png" alt="Certificate">
                     </div>
-                    <div style="margin-top: 8px; font-weight: bold;">top: 0% left: 0% translate(10%, 5%)</div>
+                    <div class="legacy-label">top: 0% left: 0% translate(10%, 5%)</div>
                 </div>
 
                 <!-- Demo 5 -->
@@ -65,7 +72,7 @@
                     <div class="relative img-5">
                         <img src="/image/undraw_Certificate_re_yadi.png" alt="Certificate">
                     </div>
-                    <div style="margin-top: 8px; font-weight: bold;">top: 50% left: 50% scale(0.5)</div>
+                    <div class="legacy-label">top: 50% left: 50% scale(0.5)</div>
                 </div>
 
                 <!-- Demo 6 -->
@@ -73,11 +80,19 @@
                     <div class="relative img-6 overflow-hidden">
                         <img src="/image/undraw_Certificate_re_yadi.png" alt="Certificate">
                     </div>
-                    <div style="margin-top: 8px; font-weight: bold;">top: 50% left: 50% scale(1.5)<br><span class="badge badge-orange">overflow: hidden</span></div>
+                    <div class="legacy-label">
+                        top: 50% left: 50% scale(1.5)<br>
+                        <span class="badge badge-orange" style="margin-top: 4px;">overflow: hidden</span>
+                    </div>
                 </div>
             </div>
 
-            <pre class="code-box"><code>.relative::before {
+            <pre class="code-box"><code>.relative {
+    position: relative;
+    border: 2px solid red;
+    isolation: isolate; /* Creates independent stacking context */
+}
+.relative::before {
     content: "";
     background-color: khaki;
     width: 100%;
@@ -90,97 +105,159 @@
 }</code></pre>
         </div>
 
-        <!-- Section 2: Creative Pseudo-Elements: Tooltips, Ribbons, Quotes -->
+        <!-- Section 2: :has() Parent Selector (Feature 13) -->
         <div class="demo-card">
-            <h2>2. Creative Pseudo-Elements (::before &amp; ::after)</h2>
-            <p>Generate non-DOM decorative elements, pure CSS tooltips, and badges.</p>
+            <h2>2. The :has() Parent Selector (#13)</h2>
+            <p>Style parent containers based on the status of their internal children or form validation states.</p>
 
             <div class="demo-grid-2">
-                <!-- Tooltip & Ribbon -->
-                <div class="ribbon-card">
-                    <div class="ribbon">PRO</div>
-                    <h3 style="margin-top: 0;">Corner Ribbon &amp; Tooltip</h3>
-                    <p>
-                        Hover over this <span class="has-tooltip" data-tooltip="Hello from pure CSS! 🎉">interactive keyword</span> to trigger a zero-JavaScript tooltip created with <code>attr(data-tooltip)</code> and <code>::after</code>.
-                    </p>
-                </div>
-
-                <!-- Blockquote -->
-                <div>
-                    <blockquote class="fancy-quote">
-                        "Good design is as little design as possible. Less, but better — because it concentrates on the essential aspects."
-                    </blockquote>
-                    <small style="color: #64748b; margin-left: 60px;">— Dieter Rams (styled with <code>::before</code> quotation glyph)</small>
-                </div>
-            </div>
-
-            <pre class="code-box"><code>/* Pure CSS Tooltip */
-.has-tooltip::after {
-    content: attr(data-tooltip);
-    position: absolute;
-    bottom: 125%; left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.2s;
-}
-.has-tooltip:hover::after { opacity: 1; }</code></pre>
-        </div>
-
-        <!-- Section 3: Modern Pseudo-Classes: :has() Parent Selector -->
-        <div class="demo-card">
-            <h2>3. Modern Pseudo-Classes: The :has() Parent Selector</h2>
-            <p><code>:has()</code> enables styling an ancestor or previous element based on the state of its descendants!</p>
-
-            <div class="demo-grid-2">
-                <div class="interactive-card">
+                <!-- Checkbox card demo -->
+                <div class="card-has-demo">
                     <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; font-weight: bold;">
-                        <input type="checkbox" id="featureCheck" style="width: 18px; height: 18px; accent-color: #008080;">
-                        <span>Toggle Feature Activation</span>
+                        <input type="checkbox" id="featureToggleCheck" style="width: 20px; height: 20px; accent-color: #008080;">
+                        <span>Activate VIP Pass</span>
                     </label>
                     <p style="margin: 10px 0 0 0; font-size: 0.85rem; color: #475569;">
-                        When you check this box, notice how the <strong>parent card container</strong> changes its border color, background tint, and elevation automatically via <code>:has()</code>!
+                        Click the checkbox above. Notice how the parent card border lights up with a teal shadow via <code>.card:has(input:checked)</code>!
                     </p>
                 </div>
 
-                <div>
-                    <div style="font-weight: bold; margin-bottom: 6px;">nth-child(even) Styling:</div>
-                    <ul class="nth-demo-list">
-                        <li>#1 (first)</li>
-                        <li>#2 (even)</li>
-                        <li>#3 (odd)</li>
-                        <li>#4 (even)</li>
-                        <li>#5 (last)</li>
-                    </ul>
+                <!-- Form validation demo -->
+                <div class="form-has-demo">
+                    <label style="font-weight: bold; font-size: 0.9rem; display: block; margin-bottom: 6px;">
+                        Parent Form Turns Red When Invalid:
+                    </label>
+                    <input type="email" placeholder="Type invalid email to test..." style="width: 100%; padding: 8px 12px; border: 1px solid #94a3b8; border-radius: 4px; font-family: var(--font-mono); font-size: 0.85rem;">
+                    <small style="color: #64748b; display: block; margin-top: 6px;">
+                        Styled with <code>form:has(input:invalid:not(:placeholder-shown))</code>
+                    </small>
                 </div>
             </div>
 
-            <pre class="code-box"><code>/* Styles the parent card whenever a checked checkbox exists inside it! */
+            <pre class="code-box"><code>/* Styles card when internal checkbox is checked */
 .card:has(input[type="checkbox"]:checked) {
     border-color: #008080;
     background-color: #f0fdfa;
-    box-shadow: 0 4px 12px rgba(0, 128, 128, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 128, 128, 0.18);
+}
+
+/* Styles form container when email field is invalid */
+form:has(input:invalid) {
+    border: 2px solid #ef4444;
 }</code></pre>
         </div>
 
-        <!-- Section 4: Selection & Markers -->
+        <!-- Section 3: :is(), :where() & :focus-visible (Features 14 & 15) -->
         <div class="demo-card">
-            <h2>4. Micro Selectors: ::selection &amp; ::marker</h2>
-            <div class="custom-selection" style="background: #f8fafc; padding: 16px; border-radius: 6px; border: 1px solid #e2e8f0;">
-                <p style="margin: 0 0 8px 0;"><strong>Try selecting this paragraph with your cursor:</strong></p>
-                <p style="margin: 0 0 12px 0; color: #475569;">
-                    The text selection background has been customized to a sleek teal brand color using the <code>::selection</code> pseudo-element!
-                </p>
+            <h2>3. :is(), :where() &amp; :focus-visible (#14, #15)</h2>
+            <p>
+                <code>:is()</code> simplifies compound selectors (taking the highest specificity), while <code>:where()</code> always has zero (0) specificity for hassle-free defaults.
+            </p>
 
-                <div style="font-weight: bold; margin-bottom: 4px;">Custom list markers via <code>::marker</code>:</div>
-                <ul class="custom-list" style="margin: 0; color: #334155;">
-                    <li>Zero images or icons required</li>
-                    <li>Pure unicode glyph in CSS</li>
-                    <li>Customizable size and color</li>
-                </ul>
+            <div class="demo-grid-2">
+                <div style="background: #f8fafc; padding: 16px; border-radius: 6px; border: 1px solid #e2e8f0;">
+                    <div class="reset-heading-demo">Heading Styled via :where()</div>
+                    <p style="font-size: 0.85rem; color: #475569; margin: 6px 0 0 0;">
+                        Because <code>:where()</code> has 0 specificity, any utility class can easily override it without needing <code>!important</code>.
+                    </p>
+                </div>
+
+                <div style="background: #f8fafc; padding: 16px; border-radius: 6px; border: 1px solid #e2e8f0;">
+                    <div style="font-weight: bold; margin-bottom: 8px;">:focus-visible Accessibility:</div>
+                    <button class="btn-focus-demo">Tab Focus Me (Keyboard)</button>
+                    <small style="color: #64748b; display: block; margin-top: 6px;">
+                        Mouse click has no ugly outline; pressing <kbd>Tab</kbd> produces a crisp 3px accessibility ring!
+                    </small>
+                </div>
             </div>
 
-            <pre class="code-box"><code>::selection { background-color: #008080; color: #ffffff; }
-li::marker  { content: "✨ "; font-size: 1.1rem; }</code></pre>
+            <pre class="code-box"><code>/* Zero-specificity baseline styles */
+:where(h1, h2, h3) { margin: 0; }
+
+/* Accessible keyboard-only focus indicator */
+button:focus { outline: none; }
+button:focus-visible { outline: 3px solid #2563eb; outline-offset: 3px; }</code></pre>
+        </div>
+
+        <!-- Section 4: :user-valid & :user-invalid (Feature 16) -->
+        <div class="demo-card">
+            <h2>4. :user-valid &amp; :user-invalid (#16)</h2>
+            <p>
+                Unlike <code>:invalid</code> (which turns red immediately upon page load before the user even types), <code>:user-invalid</code> only displays validation feedback after user interaction and blur!
+            </p>
+
+            <div style="max-width: 440px;">
+                <label style="font-weight: bold; font-size: 0.9rem; display: block; margin-bottom: 6px;">
+                    Test Interaction-Aware Email Validation:
+                </label>
+                <input type="email" required placeholder="name@example.com" class="input-user-state">
+                <small style="color: #64748b; display: block; margin-top: 6px;">
+                    Type an invalid email, click outside, and see it turn red smoothly!
+                </small>
+            </div>
+
+            <pre class="code-box"><code>input:user-valid   { border-color: #10b981; background-color: #f0fdf4; }
+input:user-invalid { border-color: #ef4444; background-color: #fef2f2; }</code></pre>
+        </div>
+
+        <!-- Section 5: ::backdrop with Native <dialog> (Feature 17) -->
+        <div class="demo-card">
+            <h2>5. ::backdrop &amp; Top Layer &lt;dialog&gt; (#17)</h2>
+            <p>
+                HTML5 native <code>&lt;dialog&gt;</code> elements reside in the browser's Top Layer. Style the background scrim directly with <code>dialog::backdrop</code>.
+            </p>
+
+            <button class="btn-control" style="font-weight: bold; padding: 10px 18px;" onclick="document.getElementById('nativeModal').showModal()">
+                Open Native &lt;dialog&gt; (Click to test ::backdrop)
+            </button>
+
+            <!-- Native Dialog Element -->
+            <dialog id="nativeModal" class="custom-dialog">
+                <h3 style="margin-top: 0; color: #008080;">✨ Native &lt;dialog&gt; Modal</h3>
+                <p style="color: #334155; font-size: 0.9rem;">
+                    Notice the blurred, darkened backdrop behind this dialog! It is styled purely in CSS using <code>dialog::backdrop { backdrop-filter: blur(6px); }</code>.
+                </p>
+                <button class="btn-control" onclick="document.getElementById('nativeModal').close()">Close Modal</button>
+            </dialog>
+
+            <pre class="code-box"><code>dialog::backdrop {
+    background-color: rgba(15, 23, 42, 0.65);
+    backdrop-filter: blur(6px); /* Blurs page content behind modal! */
+}</code></pre>
+        </div>
+
+        <!-- Section 6: ::marker, Tooltip, Ribbon & initial-letter (Features 18 & 36) -->
+        <div class="demo-card">
+            <h2>6. Micro-Styling: ::marker, initial-letter, Tooltips &amp; Ribbons (#18, #36)</h2>
+
+            <div class="demo-grid-2">
+                <!-- Drop cap & Markers -->
+                <div style="background: #f8fafc; padding: 18px; border-radius: 6px; border: 1px solid #e2e8f0;">
+                    <p class="drop-cap-p" style="margin: 0 0 12px 0;">
+                        Cascading Style Sheets have evolved dramatically in recent specifications, giving developers fine-grained control over typography and layout.
+                    </p>
+                    <div style="font-weight: bold; margin-bottom: 6px; font-size: 0.9rem;">Custom ::marker bullets:</div>
+                    <ul class="research-markers" style="margin: 0;">
+                        <li>Zero SVG icons needed</li>
+                        <li>Built-in Unicode glyph styling</li>
+                    </ul>
+                </div>
+
+                <!-- Tooltip & Ribbon Card -->
+                <div class="ribbon-card">
+                    <div class="ribbon">PRO</div>
+                    <h3 style="margin-top: 0;">Tooltip &amp; Ribbon</h3>
+                    <p style="font-size: 0.9rem; color: #475569;">
+                        Hover over <span class="has-tooltip" data-tooltip="Pure CSS tooltip via attr()! ✨">this keyword</span> to trigger a tooltip created with <code>attr(data-tooltip)</code> and <code>::after</code>.
+                    </p>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>/* Custom bullet markers */
+ul li::marker { content: "⚡ "; color: #008080; }
+
+/* Magazine-style initial letter (Drop Cap) */
+p::first-letter { initial-letter: 3 2; color: #008080; }</code></pre>
         </div>
 
     </div>

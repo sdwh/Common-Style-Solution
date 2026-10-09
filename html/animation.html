@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="/css/animation.css">
 </head>
 <body>
+    <!-- Feature 25: Scroll-driven progress indicator -->
+    <div class="scroll-indicator-bar"></div>
 
     <div class="top-nav">
         <a href="/index.html" class="nav-link-home">&larr; Back to Overview</a>
@@ -177,6 +179,63 @@
 }</code></pre>
         </div>
 
+        <!-- Section 5: Scroll-Driven & Discrete Animations (#25, #26, #28) -->
+        <div class="demo-card">
+            <h2>5. Modern Scroll-Driven &amp; Discrete Animations (#25, #26, #28)</h2>
+            <p>
+                <strong>Scroll-driven Animation:</strong> Look at the very top edge of your browser window — the gradient reading progress bar responds directly to your page scroll via <code>animation-timeline: scroll(root block)</code> with zero JavaScript!
+            </p>
+
+            <div class="demo-grid-2">
+                <!-- Discrete display transition with @starting-style -->
+                <div>
+                    <div style="font-weight: bold; margin-bottom: 8px;">
+                        @starting-style + allow-discrete:
+                    </div>
+                    <button class="btn-control" onclick="toggleDiscrete()">Toggle display: none smoothly</button>
+
+                    <div id="discreteDemo" class="discrete-box">
+                        <strong>✨ Smooth entry from display: none!</strong>
+                        <p style="margin: 4px 0 0 0; font-size: 0.85rem; color: #0f766e;">
+                            Traditionally, transitioning from <code>display: none</code> to <code>block</code> was impossible without JS. Modern CSS solves this with <code>@starting-style</code> and <code>allow-discrete</code>!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- pointer-events: none -->
+                <div>
+                    <div style="font-weight: bold; margin-bottom: 8px;">
+                        pointer-events: none Click-Through:
+                    </div>
+                    <div class="click-through-layer" style="width: 100%;">
+                        <select class="btn-control" style="width: 100%; padding-right: 36px; appearance: none; cursor: pointer;">
+                            <option>Click anywhere on this input (even on icon)</option>
+                            <option>Option 2</option>
+                        </select>
+                        <img src="/image/openmoji-wand.svg" class="click-through-icon" alt="Wand">
+                    </div>
+                    <small style="color: #64748b; display: block; margin-top: 6px;">
+                        Clicking directly on the magic wand icon still triggers the underlying select element because of <code>pointer-events: none</code>!
+                    </small>
+                </div>
+            </div>
+
+            <pre class="code-box"><code>/* Scroll-driven progress bar */
+.progress-bar {
+    animation: grow auto linear;
+    animation-timeline: scroll(root block); /* Native browser scroll timeline! */
+}
+
+/* Animate display: none using @starting-style */
+.dialog {
+    transition: opacity 0.4s ease, display 0.4s allow-discrete;
+}
+@starting-style {
+    .dialog { opacity: 0; transform: translateY(-10px); }
+}</code></pre>
+        </div>
+
+
     </div>
 
     <!-- Fixed Home Button -->
@@ -188,6 +247,11 @@
             el.classList.remove('shake-box');
             void el.offsetWidth; // Force DOM reflow
             el.classList.add('shake-box');
+        }
+
+        function toggleDiscrete() {
+            const box = document.getElementById('discreteDemo');
+            box.classList.toggle('is-hidden');
         }
     </script>
 </body>
